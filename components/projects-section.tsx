@@ -87,7 +87,7 @@ const stats = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 px-4 bg-gradient-to-b from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
+    <section id="projects" className="py-20 px-4 bg-gradient-to-b from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -113,8 +113,8 @@ export default function ProjectsSection() {
               viewport={{ once: true }}
               className="bg-white dark:bg-gray-800 rounded-xl p-6 text-center shadow-lg"
             >
-              <stat.icon className="h-8 w-8 mx-auto mb-2 text-purple-500" />
-              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{stat.value}</div>
+              <stat.icon className="h-8 w-8 mx-auto mb-2 text-blue-500" />
+              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{stat.value}</div>
               <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
             </motion.div>
           ))}
@@ -138,13 +138,13 @@ export default function ProjectsSection() {
               )}
               
               <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:transform hover:scale-105">
-                <div className="h-32 bg-gradient-to-br from-purple-400 via-pink-400 to-red-400 flex items-center justify-center text-6xl">
+                <div className="h-32 bg-gradient-to-br from-blue-400 via-green-400 to-orange-400 flex items-center justify-center text-6xl">
                   {project.icon}
                 </div>
 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">
+                    <span className="text-xs font-semibold px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
                       {project.category}
                     </span>
                     {project.highlight && (
@@ -162,7 +162,7 @@ export default function ProjectsSection() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-xs rounded-full"
+                        className="px-2 py-1 bg-gradient-to-r from-blue-100 to-green-100 dark:from-blue-900/30 dark:to-green-900/30 text-xs rounded-full"
                       >
                         #{tag}
                       </span>
@@ -181,7 +181,7 @@ export default function ProjectsSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium shadow-lg">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full font-medium shadow-lg">
             <Rocket className="h-5 w-5" />
             更多有趣的活动等我去探索...
           </div>

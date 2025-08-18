@@ -20,7 +20,7 @@ const interests = [
     icon: Music,
     title: "钢琴学习",
     description: "正在学习钢琴，对音乐很有兴趣",
-    color: "from-purple-400 to-pink-500"
+    color: "from-blue-400 to-green-500"
   },
   {
     icon: Palette,
@@ -32,7 +32,7 @@ const interests = [
     icon: MapPin,
     title: "旅游探索",
     description: "喜欢和爸爸妈妈一起旅游，去过很多有趣的地方",
-    color: "from-red-400 to-pink-500"
+    color: "from-green-400 to-orange-500"
   }
 ];
 
@@ -141,7 +141,7 @@ export default function AboutSection() {
                       whileInView={{ width: `${skill.level}%` }}
                       transition={{ duration: 1, ease: "easeOut" }}
                       viewport={{ once: true }}
-                      className="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500"
+                      className="h-full rounded-full bg-gradient-to-r from-blue-500 to-green-500"
                     />
                   </div>
                 </motion.div>
@@ -180,7 +180,7 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-2xl p-8 text-white text-center"
+          className="bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 rounded-2xl p-8 text-white text-center"
         >
           <h3 className="text-2xl font-bold mb-4">我的梦想 ✨</h3>
           <p className="max-w-3xl mx-auto text-lg">

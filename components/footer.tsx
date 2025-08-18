@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-r from-purple-900 to-pink-900 text-white py-12">
+    <footer className="bg-gradient-to-r from-blue-900 to-green-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="mb-6 md:mb-0 text-center md:text-left">
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-purple-800 mt-8 pt-8 text-center">
+        <div className="border-t border-blue-800 mt-8 pt-8 text-center">
           <p className="text-gray-300 flex items-center justify-center gap-1">
             © {currentYear} Yoyo 的个人主页 · 和爸爸一起用
             <Heart className="h-4 w-4 text-red-400 fill-current animate-pulse" />

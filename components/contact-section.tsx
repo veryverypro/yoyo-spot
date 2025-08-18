@@ -97,7 +97,7 @@ ${formData.message}
   };
 
   return (
-    <section id="contact" className="py-20 px-4 bg-gradient-to-b from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+    <section id="contact" className="py-20 px-4 bg-gradient-to-b from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -135,7 +135,7 @@ ${formData.message}
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                     placeholder="叔叔/阿姨"
                   />
                 </div>
@@ -151,7 +151,7 @@ ${formData.message}
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -167,7 +167,7 @@ ${formData.message}
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                     placeholder="想和 Yoyo 交朋友"
                   />
                 </div>
@@ -183,7 +183,7 @@ ${formData.message}
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors resize-none"
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
                     placeholder="请留下您的留言..."
                   />
                 </div>
@@ -191,7 +191,7 @@ ${formData.message}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 font-medium shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg hover:from-blue-600 hover:to-green-600 transition-all transform hover:scale-105 font-medium shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Sparkles className="h-5 w-5" />
                   {isSubmitting ? "发送中..." : "发送留言"}
@@ -225,8 +225,8 @@ ${formData.message}
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                    <Mail className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                    <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">邮箱</h4>
