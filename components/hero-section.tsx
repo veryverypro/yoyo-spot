@@ -34,7 +34,7 @@ export default function HeroSection() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-          className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-400 to-green-500 mx-auto mb-6 sm:mb-8 flex items-center justify-center text-white text-4xl sm:text-5xl font-bold shadow-xl"
+          className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-400 to-green-500 mx-auto mb-6 sm:mb-8 flex items-center justify-center text-white text-5xl sm:text-5xl md:text-6xl font-bold shadow-xl"
         >
           曦
         </motion.div>
@@ -68,17 +68,17 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.5 }}
-          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4 sm:px-0"
+          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12 px-2 sm:px-0"
         >
-          <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
+          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
             <Gamepad2 className="h-4 w-4 sm:h-5 sm:w-5" />
             <span className="text-xs sm:text-sm font-medium">滑板达人</span>
           </div>
-          <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
+          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
             <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" />
             <span className="text-xs sm:text-sm font-medium">游泳健将</span>
           </div>
-          <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+          <div className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
             <BookOpen className="h-4 w-4 sm:h-5 sm:w-5" />
             <span className="text-xs sm:text-sm font-medium">旅游探索家</span>
           </div>
