@@ -31,7 +31,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "glass-effect shadow-lg"
+          ? "glass-effect shadow-lg supports-[backdrop-filter]:bg-white/70 supports-[backdrop-filter]:dark:bg-gray-900/70"
           : "bg-transparent"
       }`}
     >
