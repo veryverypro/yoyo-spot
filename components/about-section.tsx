@@ -62,7 +62,7 @@ const achievements = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 px-4">
+    <section id="about" className="py-12 sm:py-16 md:py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -71,14 +71,14 @@ export default function AboutSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4">关于我 👦</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">关于我 👦</h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg px-4 sm:px-0">
             大家好！我是徐子曦（Vincent/Yoyo），今年7岁，是北京西城区奋斗小学一年级的学生。
             我性格开朗，每天都很开心，喜欢运动、旅游和各种有趣的活动！
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mb-12 sm:mb-16">
           {interests.map((interest, index) => (
             <motion.div
               key={interest.title}
@@ -94,12 +94,12 @@ export default function AboutSection() {
                   backgroundImage: `linear-gradient(to right, ${interest.color.split(' ')[1]}, ${interest.color.split(' ')[3]})`
                 }}
               />
-              <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl hover:transform hover:scale-105 transition-all">
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${interest.color} flex items-center justify-center mb-4`}>
-                  <interest.icon className="h-6 w-6 text-white" />
+              <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 shadow-xl hover:transform hover:scale-105 transition-all">
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-r ${interest.color} flex items-center justify-center mb-3 sm:mb-4`}>
+                  <interest.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">{interest.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                <h3 className="font-bold text-base sm:text-lg mb-2">{interest.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
                   {interest.description}
                 </p>
               </div>
@@ -107,15 +107,15 @@ export default function AboutSection() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              我的技能 <span className="text-3xl">💪</span>
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
+              我的技能 <span className="text-2xl sm:text-3xl">💪</span>
             </h3>
             <div className="space-y-4">
               {skills.map((skill, index) => (
@@ -155,8 +155,8 @@ export default function AboutSection() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              我的成就 <span className="text-3xl">🌟</span>
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
+              我的成就 <span className="text-2xl sm:text-3xl">🌟</span>
             </h3>
             <div className="grid grid-cols-1 gap-3">
               {achievements.map((achievement, index) => (
@@ -166,9 +166,9 @@ export default function AboutSection() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg p-4 border-l-4 border-yellow-500"
+                  className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg p-3 sm:p-4 border-l-4 border-yellow-500"
                 >
-                  <p className="font-medium">{achievement}</p>
+                  <p className="text-sm sm:text-base font-medium">{achievement}</p>
                 </motion.div>
               ))}
             </div>
@@ -180,10 +180,10 @@ export default function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 rounded-2xl p-8 text-white text-center"
+          className="bg-gradient-to-r from-blue-500 via-green-500 to-orange-500 rounded-2xl p-6 sm:p-8 text-white text-center"
         >
-          <h3 className="text-2xl font-bold mb-4">我的梦想 ✨</h3>
-          <p className="max-w-3xl mx-auto text-lg">
+          <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">我的梦想 ✨</h3>
+          <p className="max-w-3xl mx-auto text-sm sm:text-base md:text-lg px-4 sm:px-0">
             我想成为一个运动健将和旅游探险家！希望能在滑板上做出酷炫的动作，
             在大海里自由游泳，弹出美妙的钢琴曲，画出美丽的图画，
             还要去更多有趣的地方旅游，继续保持全班跑得最快的记录！

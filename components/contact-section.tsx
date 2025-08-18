@@ -97,7 +97,7 @@ ${formData.message}
   };
 
   return (
-    <section id="contact" className="py-20 px-4 bg-gradient-to-b from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 px-4 bg-gradient-to-b from-blue-50 to-green-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -106,26 +106,26 @@ ${formData.message}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold mb-4">联系我们 💌</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">联系我们 💌</h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg px-2 sm:px-0">
             欢迎和 Yoyo 交朋友！有任何问题或想法，请联系爸爸妈妈
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                给我留言 <span className="text-2xl">✉️</span>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-xl">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
+                给我留言 <span className="text-xl sm:text-2xl">✉️</span>
               </h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium mb-1 sm:mb-2">
                     您的称呼
                   </label>
                   <input
@@ -141,7 +141,7 @@ ${formData.message}
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium mb-1 sm:mb-2">
                     联系邮箱
                   </label>
                   <input
@@ -157,7 +157,7 @@ ${formData.message}
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                  <label htmlFor="subject" className="block text-sm font-medium mb-1 sm:mb-2">
                     留言主题
                   </label>
                   <input
@@ -173,7 +173,7 @@ ${formData.message}
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium mb-1 sm:mb-2">
                     留言内容
                   </label>
                   <textarea
@@ -205,13 +205,13 @@ ${formData.message}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl">
-              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                家长联系方式 <span className="text-xl">👨‍👩‍👦</span>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 shadow-xl">
+              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center gap-2">
+                家长联系方式 <span className="text-lg sm:text-xl">👨‍👩‍👦</span>
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                     <Users className="h-6 w-6 text-blue-600 dark:text-blue-400" />
@@ -256,7 +256,7 @@ ${formData.message}
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-yellow-400 to-orange-400 rounded-2xl p-6 text-white">
+            <div className="bg-gradient-to-br from-yellow-400 to-orange-400 rounded-2xl p-4 sm:p-6 text-white">
               <h4 className="text-xl font-bold mb-3 flex items-center gap-2">
                 交朋友啦！ <Heart className="h-6 w-6" />
               </h4>

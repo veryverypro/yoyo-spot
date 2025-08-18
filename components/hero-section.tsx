@@ -34,12 +34,12 @@ export default function HeroSection() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-          className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-400 to-green-500 mx-auto mb-8 flex items-center justify-center text-white text-5xl font-bold shadow-xl"
+          className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-400 to-green-500 mx-auto mb-6 sm:mb-8 flex items-center justify-center text-white text-4xl sm:text-5xl font-bold shadow-xl"
         >
           曦
         </motion.div>
 
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-4">
           <span className="inline-block min-h-[1.2em]">
             {text}
             <span className="animate-pulse">✨</span>
@@ -50,7 +50,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
-          className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-4"
+          className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-3 sm:mb-4"
         >
           徐子曦 (Vincent) · 7岁 · 一年级
         </motion.p>
@@ -59,7 +59,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.5 }}
-          className="text-lg md:text-xl text-gray-500 dark:text-gray-400 mb-8"
+          className="text-base sm:text-lg md:text-xl text-gray-500 dark:text-gray-400 mb-6 sm:mb-8"
         >
           北京西城区奋斗小学 小学生
         </motion.p>
@@ -68,19 +68,19 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.5 }}
-          className="flex justify-center space-x-6 mb-12"
+          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4 sm:px-0"
         >
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
-            <Gamepad2 className="h-5 w-5" />
-            <span className="text-sm font-medium">滑板达人</span>
+          <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
+            <Gamepad2 className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="text-xs sm:text-sm font-medium">滑板达人</span>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
-            <Sparkles className="h-5 w-5" />
-            <span className="text-sm font-medium">游泳健将</span>
+          <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
+            <Sparkles className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="text-xs sm:text-sm font-medium">游泳健将</span>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
-            <BookOpen className="h-5 w-5" />
-            <span className="text-sm font-medium">旅游探索家</span>
+          <div className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+            <BookOpen className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="text-xs sm:text-sm font-medium">旅游探索家</span>
           </div>
         </motion.div>
 
@@ -91,7 +91,7 @@ export default function HeroSection() {
         >
           <button
             onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full hover:from-blue-600 hover:to-green-600 transition-all transform hover:scale-105 font-medium shadow-lg"
+            className="px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full hover:from-blue-600 hover:to-green-600 transition-all transform hover:scale-105 text-sm sm:text-base font-medium shadow-lg"
           >
             探索我的世界 🚀
           </button>
@@ -107,10 +107,10 @@ export default function HeroSection() {
         <ChevronDown className="h-8 w-8 animate-bounce text-gray-400" />
       </motion.div>
 
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-        <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-orange-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-48 sm:w-72 h-48 sm:h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+        <div className="absolute top-1/3 right-1/4 w-48 sm:w-72 h-48 sm:h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-48 sm:w-72 h-48 sm:h-72 bg-orange-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
     </section>
   );
