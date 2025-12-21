@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打字游戏合集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 56px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .game-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .game-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .game-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 15px;
+        }
+
+        .game-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .game-features {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .game-features li {
+            margin: 8px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .play-btn {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .game-card:hover .play-btn {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⌨️ 打字游戏合集</h1>
+            <p>提升打字速度，享受游戏乐趣！</p>
+        </div>
+
+        <div class="games-grid">
+            <a href="/typing-game.html" class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-title">字母雨</div>
+                <div class="game-description">
+                    字母从天而降，快速敲击键盘消除它们！经典的打字练习游戏。
+                </div>
+                <ul class="game-features">
+                    <li>✨ 字母从上方掉落</li>
+                    <li>🎮 5种速度档位</li>
+                    <li>📝 3种字母范围</li>
+                    <li>💯 连击和积分系统</li>
+                    <li>❤️ 生命值挑战</li>
+                </ul>
+                <div class="play-btn">开始游戏</div>
+            </a>
+
+            <a href="/typing-racer.html" class="game-card">
+                <div class="game-icon">🏎️</div>
+                <div class="game-title">打字赛车</div>
+                <div class="game-description">
+                    与电脑对手竞速，通过快速打字让你的赛车冲向终点！
+                </div>
+                <ul class="game-features">
+                    <li>🏁 4人赛车竞技</li>
+                    <li>🤖 3个AI对手</li>
+                    <li>⚡ 4种难度等级</li>
+                    <li>📊 WPM速度统计</li>
+                    <li>🏆 排名和成就</li>
+                </ul>
+                <div class="play-btn">开始比赛</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>选择一个游戏，开始你的打字之旅！</p>
+        </div>
+    </div>
+</body>
+</html>

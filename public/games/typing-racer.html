@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打字赛车游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .stats-panel {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-item label {
+            display: block;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .stat-item .value {
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .race-track {
+            background: #2d2d2d;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .race-track::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 50px,
+                rgba(255,255,255,0.1) 50px,
+                rgba(255,255,255,0.1) 100px
+            );
+            animation: roadAnimation 1s linear infinite;
+        }
+
+        @keyframes roadAnimation {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100px);
+            }
+        }
+
+        .lane {
+            position: relative;
+            height: 80px;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border-left: 5px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+        }
+
+        .lane:last-child {
+            margin-bottom: 0;
+        }
+
+        .lane-label {
+            position: absolute;
+            left: 15px;
+            top: 5px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        .car {
+            position: absolute;
+            left: 20px;
+            font-size: 40px;
+            transition: left 0.2s ease-out;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            z-index: 5;
+            transform: scaleX(-1);
+        }
+
+        .finish-line {
+            position: absolute;
+            right: 10px;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: repeating-linear-gradient(
+                45deg,
+                #fff,
+                #fff 10px,
+                #000 10px,
+                #000 20px
+            );
+        }
+
+        .typing-area {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .current-letter {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .current-letter .label {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .current-letter .letter {
+            font-size: 120px;
+            font-weight: bold;
+            color: #2a5298;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .letter-sequence {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            letter-spacing: 8px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .letter-sequence .typed {
+            color: #4CAF50;
+        }
+
+        .letter-sequence .current {
+            color: #2a5298;
+            background: rgba(42, 82, 152, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .letter-sequence .pending {
+            color: #999;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn-start {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-start:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-reset {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: #da190b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .settings {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .setting-item label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .setting-item select,
+        .setting-item input {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .game-over {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+            min-width: 400px;
+        }
+
+        .game-over h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .game-over .result {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .game-over .winner {
+            color: #FFD700;
+        }
+
+        .game-over .loser {
+            color: #ff6b6b;
+        }
+
+        .game-over .stats {
+            text-align: left;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .game-over .stats p {
+            margin: 10px 0;
+        }
+
+        .countdown {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 150px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+            animation: countdownPulse 1s ease-in-out;
+        }
+
+        @keyframes countdownPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏎️ 打字赛车游戏</h1>
+            <p>快速打字，超越对手！</p>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-item">
+                <label>速度 (WPM)</label>
+                <div class="value" id="wpm">0</div>
+            </div>
+            <div class="stat-item">
+                <label>准确率</label>
+                <div class="value" id="accuracy">100%</div>
+            </div>
+            <div class="stat-item">
+                <label>进度</label>
+                <div class="value" id="progress">0/30</div>
+            </div>
+        </div>
+
+        <div class="race-track">
+            <div class="lane">
+                <div class="lane-label">你</div>
+                <div class="car" id="playerCar">🏎️</div>
+                <div class="finish-line"></div>
+            </div>
+            <div class="lane" id="aiLane1">
+                <div class="lane-label">电脑 1</div>
+                <div class="car" id="aiCar1">🚗</div>
+                <div class="finish-line"></div>
+            </div>
+            <div class="lane" id="aiLane2">
+                <div class="lane-label">电脑 2</div>
+                <div class="car" id="aiCar2">🚙</div>
+                <div class="finish-line"></div>
+            </div>
+            <div class="lane" id="aiLane3">
+                <div class="lane-label">电脑 3</div>
+                <div class="car" id="aiCar3">🚕</div>
+                <div class="finish-line"></div>
+            </div>
+        </div>
+
+        <div class="typing-area">
+            <div class="current-letter">
+                <div class="label">输入这个字母：</div>
+                <div class="letter" id="currentLetter">A</div>
+            </div>
+            <div class="letter-sequence" id="letterSequence"></div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-start" id="startBtn">开始比赛</button>
+            <button class="btn btn-reset" id="resetBtn">重置</button>
+        </div>
+
+        <div class="settings">
+            <div class="setting-item">
+                <label>字母数量：</label>
+                <select id="letterCount">
+                    <option value="20">20 字母</option>
+                    <option value="30" selected>30 字母</option>
+                    <option value="50">50 字母</option>
+                    <option value="100">100 字母</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label>字母范围：</label>
+                <select id="letterRange">
+                    <option value="basic">基础 (ASDF)</option>
+                    <option value="homerow">中排 (ASDFGHJKL)</option>
+                    <option value="full" selected>全字母 (A-Z)</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label>AI难度：</label>
+                <select id="aiDifficulty">
+                    <option value="easy">简单</option>
+                    <option value="medium" selected>中等</option>
+                    <option value="hard">困难</option>
+                    <option value="expert">专家</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="countdown" id="countdown">3</div>
+
+    <div class="game-over" id="gameOver">
+        <h2 id="gameOverTitle">比赛结束！</h2>
+        <div class="result" id="gameResult"></div>
+        <div class="stats">
+            <p>你的速度: <strong id="finalWPM">0</strong> WPM</p>
+            <p>准确率: <strong id="finalAccuracy">100</strong>%</p>
+            <p>用时: <strong id="finalTime">0</strong> 秒</p>
+            <p>总字母数: <strong id="finalTotal">0</strong></p>
+            <p>错误数: <strong id="finalErrors">0</strong></p>
+        </div>
+        <button class="btn btn-start" onclick="resetGame()">再来一局</button>
+    </div>
+
+    <script>
+        // 游戏状态
+        let gameState = {
+            isRunning: false,
+            isPaused: false,
+            letterSequence: [],
+            currentIndex: 0,
+            startTime: null,
+            correctCount: 0,
+            errorCount: 0,
+            totalLetters: 30,
+            letterRange: 'full',
+            aiDifficulty: 'medium',
+            playerProgress: 0,
+            aiProgress: [0, 0, 0],
+            aiIntervals: [],
+            playerFinished: false,
+            raceFinished: false
+        };
+
+        // 字母范围配置
+        const letterRangeConfig = {
+            basic: 'ASDF',
+            homerow: 'ASDFGHJKL',
+            full: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        };
+
+        // AI难度配置 (每次移动的间隔，毫秒)
+        const aiDifficultyConfig = {
+            easy: { min: 800, max: 1200 },
+            medium: { min: 500, max: 800 },
+            hard: { min: 350, max: 600 },
+            expert: { min: 250, max: 450 }
+        };
+
+        // DOM元素
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const currentLetterEl = document.getElementById('currentLetter');
+        const letterSequenceEl = document.getElementById('letterSequence');
+        const playerCar = document.getElementById('playerCar');
+        const aiCars = [
+            document.getElementById('aiCar1'),
+            document.getElementById('aiCar2'),
+            document.getElementById('aiCar3')
+        ];
+        const wpmEl = document.getElementById('wpm');
+        const accuracyEl = document.getElementById('accuracy');
+        const progressEl = document.getElementById('progress');
+        const gameOverEl = document.getElementById('gameOver');
+        const countdownEl = document.getElementById('countdown');
+        const letterCountSelect = document.getElementById('letterCount');
+        const letterRangeSelect = document.getElementById('letterRange');
+        const aiDifficultySelect = document.getElementById('aiDifficulty');
+
+        // 生成随机字母序列
+        function generateLetterSequence() {
+            const letters = letterRangeConfig[gameState.letterRange];
+            gameState.letterSequence = [];
+            for (let i = 0; i < gameState.totalLetters; i++) {
+                const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+                gameState.letterSequence.push(randomLetter);
+            }
+            updateLetterSequenceDisplay();
+        }
+
+        // 更新字母序列显示
+        function updateLetterSequenceDisplay() {
+            let html = '';
+            gameState.letterSequence.forEach((letter, index) => {
+                if (index < gameState.currentIndex) {
+                    html += `<span class="typed">${letter}</span>`;
+                } else if (index === gameState.currentIndex) {
+                    html += `<span class="current">${letter}</span>`;
+                } else {
+                    html += `<span class="pending">${letter}</span>`;
+                }
+            });
+            letterSequenceEl.innerHTML = html;
+
+            // 更新当前字母显示
+            if (gameState.currentIndex < gameState.letterSequence.length) {
+                currentLetterEl.textContent = gameState.letterSequence[gameState.currentIndex];
+            }
+        }
+
+        // 更新赛车位置
+        function updateCarPosition(car, progress) {
+            const maxPosition = car.parentElement.offsetWidth - 80;
+            const position = 20 + (maxPosition * progress);
+            car.style.left = position + 'px';
+        }
+
+        // 更新统计信息
+        function updateStats() {
+            // 计算WPM (假设每个字母作为一个"单词")
+            const timeElapsed = (Date.now() - gameState.startTime) / 1000 / 60; // 分钟
+            const wpm = timeElapsed > 0 ? Math.round(gameState.correctCount / timeElapsed) : 0;
+            wpmEl.textContent = wpm;
+
+            // 计算准确率
+            const total = gameState.correctCount + gameState.errorCount;
+            const accuracy = total > 0 ? Math.round((gameState.correctCount / total) * 100) : 100;
+            accuracyEl.textContent = accuracy + '%';
+
+            // 更新进度
+            progressEl.textContent = `${gameState.currentIndex}/${gameState.totalLetters}`;
+
+            // 更新玩家赛车位置
+            gameState.playerProgress = gameState.currentIndex / gameState.totalLetters;
+            updateCarPosition(playerCar, gameState.playerProgress);
+        }
+
+        // AI移动
+        function startAI() {
+            const difficulty = aiDifficultyConfig[gameState.aiDifficulty];
+
+            aiCars.forEach((car, index) => {
+                const randomInterval = Math.random() * (difficulty.max - difficulty.min) + difficulty.min;
+
+                const interval = setInterval(() => {
+                    if (gameState.raceFinished) {
+                        clearInterval(interval);
+                        return;
+                    }
+
+                    gameState.aiProgress[index] += (1 / gameState.totalLetters);
+
+                    if (gameState.aiProgress[index] >= 1) {
+                        gameState.aiProgress[index] = 1;
+                        updateCarPosition(car, 1);
+                        clearInterval(interval);
+                        checkRaceFinished();
+                    } else {
+                        updateCarPosition(car, gameState.aiProgress[index]);
+                    }
+                }, randomInterval);
+
+                gameState.aiIntervals.push(interval);
+            });
+        }
+
+        // 检查比赛是否结束
+        function checkRaceFinished() {
+            if (gameState.raceFinished) return;
+
+            if (gameState.playerFinished || gameState.aiProgress.some(p => p >= 1)) {
+                gameState.raceFinished = true;
+                endGame();
+            }
+        }
+
+        // 处理键盘输入
+        function handleKeyPress(event) {
+            if (!gameState.isRunning || gameState.raceFinished) return;
+
+            const key = event.key.toUpperCase();
+            const expectedLetter = gameState.letterSequence[gameState.currentIndex];
+
+            if (key === expectedLetter) {
+                gameState.correctCount++;
+                gameState.currentIndex++;
+
+                if (gameState.currentIndex >= gameState.totalLetters) {
+                    gameState.playerFinished = true;
+                    gameState.playerProgress = 1;
+                    updateCarPosition(playerCar, 1);
+                    checkRaceFinished();
+                } else {
+                    updateLetterSequenceDisplay();
+                    updateStats();
+                }
+            } else if (key.match(/[A-Z]/)) {
+                gameState.errorCount++;
+                updateStats();
+            }
+        }
+
+        // 倒计时
+        async function countdown() {
+            countdownEl.style.display = 'block';
+
+            for (let i = 3; i > 0; i--) {
+                countdownEl.textContent = i;
+                countdownEl.style.animation = 'none';
+                setTimeout(() => {
+                    countdownEl.style.animation = 'countdownPulse 1s ease-in-out';
+                }, 10);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
+            countdownEl.textContent = 'GO!';
+            countdownEl.style.animation = 'none';
+            setTimeout(() => {
+                countdownEl.style.animation = 'countdownPulse 1s ease-in-out';
+            }, 10);
+
+            await new Promise(resolve => setTimeout(resolve, 500));
+            countdownEl.style.display = 'none';
+        }
+
+        // 开始游戏
+        async function startGame() {
+            if (gameState.isRunning) return;
+
+            // 保存设置
+            gameState.totalLetters = parseInt(letterCountSelect.value);
+            gameState.letterRange = letterRangeSelect.value;
+            gameState.aiDifficulty = aiDifficultySelect.value;
+
+            // 禁用设置
+            letterCountSelect.disabled = true;
+            letterRangeSelect.disabled = true;
+            aiDifficultySelect.disabled = true;
+            startBtn.disabled = true;
+
+            // 生成字母序列
+            generateLetterSequence();
+
+            // 倒计时
+            await countdown();
+
+            // 开始游戏
+            gameState.isRunning = true;
+            gameState.startTime = Date.now();
+            startAI();
+            updateStats();
+        }
+
+        // 重置游戏
+        function resetGame() {
+            // 清理AI定时器
+            gameState.aiIntervals.forEach(interval => clearInterval(interval));
+
+            // 重置状态
+            gameState = {
+                isRunning: false,
+                isPaused: false,
+                letterSequence: [],
+                currentIndex: 0,
+                startTime: null,
+                correctCount: 0,
+                errorCount: 0,
+                totalLetters: parseInt(letterCountSelect.value),
+                letterRange: letterRangeSelect.value,
+                aiDifficulty: aiDifficultySelect.value,
+                playerProgress: 0,
+                aiProgress: [0, 0, 0],
+                aiIntervals: [],
+                playerFinished: false,
+                raceFinished: false
+            };
+
+            // 重置UI
+            letterCountSelect.disabled = false;
+            letterRangeSelect.disabled = false;
+            aiDifficultySelect.disabled = false;
+            startBtn.disabled = false;
+            gameOverEl.style.display = 'none';
+
+            // 重置赛车位置
+            updateCarPosition(playerCar, 0);
+            aiCars.forEach(car => updateCarPosition(car, 0));
+
+            // 重置统计
+            wpmEl.textContent = '0';
+            accuracyEl.textContent = '100%';
+            progressEl.textContent = `0/${gameState.totalLetters}`;
+
+            // 重置显示
+            currentLetterEl.textContent = 'A';
+            letterSequenceEl.innerHTML = '';
+        }
+
+        // 结束游戏
+        function endGame() {
+            gameState.isRunning = false;
+
+            // 清理AI定时器
+            gameState.aiIntervals.forEach(interval => clearInterval(interval));
+
+            // 计算最终统计
+            const timeElapsed = (Date.now() - gameState.startTime) / 1000;
+            const wpm = Math.round((gameState.correctCount / timeElapsed) * 60);
+            const total = gameState.correctCount + gameState.errorCount;
+            const accuracy = total > 0 ? Math.round((gameState.correctCount / total) * 100) : 100;
+
+            // 判断排名
+            let playerRank = 1;
+            gameState.aiProgress.forEach(progress => {
+                if (progress > gameState.playerProgress) {
+                    playerRank++;
+                }
+            });
+
+            // 显示结果
+            document.getElementById('finalWPM').textContent = wpm;
+            document.getElementById('finalAccuracy').textContent = accuracy;
+            document.getElementById('finalTime').textContent = timeElapsed.toFixed(2);
+            document.getElementById('finalTotal').textContent = gameState.totalLetters;
+            document.getElementById('finalErrors').textContent = gameState.errorCount;
+
+            if (playerRank === 1) {
+                document.getElementById('gameOverTitle').textContent = '🏆 胜利！';
+                document.getElementById('gameResult').innerHTML = '<span class="winner">你赢得了比赛！</span>';
+            } else {
+                document.getElementById('gameOverTitle').textContent = '比赛结束';
+                document.getElementById('gameResult').innerHTML = `<span class="loser">你获得第 ${playerRank} 名</span>`;
+            }
+
+            gameOverEl.style.display = 'block';
+        }
+
+        // 事件监听
+        startBtn.addEventListener('click', startGame);
+        resetBtn.addEventListener('click', resetGame);
+        document.addEventListener('keydown', handleKeyPress);
+
+        // 初始化
+        currentLetterEl.textContent = 'A';
+    </script>
+</body>
+</html>

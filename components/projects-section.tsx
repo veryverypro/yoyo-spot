@@ -6,6 +6,26 @@ import { Trophy, Sparkles, Star, Zap, Rocket, Heart } from "lucide-react";
 const projects = [
   {
     id: 1,
+    title: "字母雨打字游戏",
+    description: "快速敲击键盘消除从天而降的字母，练习打字速度和反应力！",
+    category: "互动游戏",
+    icon: "⌨️",
+    tags: ["打字", "游戏", "练习"],
+    highlight: true,
+    link: "/games/typing-game.html"
+  },
+  {
+    id: 2,
+    title: "打字赛车游戏",
+    description: "和电脑选手竞速，通过快速打字让赛车冲向终点！",
+    category: "互动游戏",
+    icon: "🏎️",
+    tags: ["赛车", "打字", "竞技"],
+    highlight: true,
+    link: "/games/typing-racer.html"
+  },
+  {
+    id: 3,
     title: "滑板碗池挑战",
     description: "已经可以在碗池里面练习滑板了，这是我最骄傲的成就！",
     category: "体育成就",
@@ -14,7 +34,7 @@ const projects = [
     highlight: true
   },
   {
-    id: 2,
+    id: 4,
     title: "四川峨眉山之旅",
     description: "爬峨眉山、游都江堰，感受巴蜀文化和古代智慧",
     category: "旅游探索",
@@ -23,7 +43,7 @@ const projects = [
     highlight: true
   },
   {
-    id: 3,
+    id: 5,
     title: "内蒙古草原体验",
     description: "在内蒙古大草原骑马，还在沙漠里玩沙子，超级有趣！",
     category: "旅游探索",
@@ -32,7 +52,7 @@ const projects = [
     highlight: false
   },
   {
-    id: 4,
+    id: 6,
     title: "香港迪士尼乐园",
     description: "在香港迪士尼见到了米老鼠，玩了好多刺激的游戏！",
     category: "旅游探索",
@@ -41,7 +61,7 @@ const projects = [
     highlight: true
   },
   {
-    id: 5,
+    id: 7,
     title: "山西太行山探险",
     description: "爬太行山看黄河壶口瀑布，瀑布的声音好大好壮观！",
     category: "旅游探索",
@@ -50,7 +70,7 @@ const projects = [
     highlight: false
   },
   {
-    id: 6,
+    id: 8,
     title: "江南水乡之旅",
     description: "去了杭州西湖、苏州虎丘、扬州汽渡，体验了江南的美景",
     category: "旅游探索",
@@ -59,7 +79,7 @@ const projects = [
     highlight: true
   },
   {
-    id: 7,
+    id: 9,
     title: "山东青岛啤酒厂",
     description: "参观了青岛啤酒厂，了解了啤酒是怎么制作的",
     category: "旅游探索",
@@ -68,7 +88,7 @@ const projects = [
     highlight: false
   },
   {
-    id: 8,
+    id: 10,
     title: "全班跑步第一",
     description: "在学校运动会上跑得最快，是全班的跑步冠军！",
     category: "体育成就",
@@ -122,21 +142,8 @@ export default function ProjectsSection() {
 
         {/* 作品展示 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="relative group"
-            >
-              {project.highlight && (
-                <div className="absolute -top-2 -right-2 z-10">
-                  <Star className="h-8 w-8 text-yellow-400 fill-yellow-400 animate-pulse" />
-                </div>
-              )}
-              
+          {projects.map((project, index) => {
+            const CardContent = (
               <div className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all hover:transform hover:scale-105">
                 <div className="h-24 sm:h-32 bg-gradient-to-br from-blue-400 via-green-400 to-orange-400 flex items-center justify-center text-5xl sm:text-6xl">
                   {project.icon}
@@ -151,9 +158,9 @@ export default function ProjectsSection() {
                       <Sparkles className="h-5 w-5 text-yellow-500" />
                     )}
                   </div>
-                  
+
                   <h3 className="text-lg sm:text-xl font-bold mb-2 mt-3">{project.title}</h3>
-                  
+
                   <p className="text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 text-xs sm:text-sm">
                     {project.description}
                   </p>
@@ -170,8 +177,33 @@ export default function ProjectsSection() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          ))}
+            );
+
+            return (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="relative group"
+              >
+                {project.highlight && (
+                  <div className="absolute -top-2 -right-2 z-10">
+                    <Star className="h-8 w-8 text-yellow-400 fill-yellow-400 animate-pulse" />
+                  </div>
+                )}
+
+                {project.link ? (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="block cursor-pointer">
+                    {CardContent}
+                  </a>
+                ) : (
+                  CardContent
+                )}
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div
