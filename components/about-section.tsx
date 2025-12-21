@@ -73,7 +73,7 @@ export default function AboutSection() {
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">关于我 👦</h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg px-4 sm:px-0">
-            大家好！我是徐子曦（Vincent/Yoyo），今年7岁，是北京西城区奋斗小学一年级的学生。
+            大家好！我是徐子曦（Vincent/Yoyo），今年7岁，是北京西城区奋斗小学二年级的学生。
             我性格开朗，每天都很开心，喜欢运动、旅游和各种有趣的活动！
           </p>
         </motion.div>

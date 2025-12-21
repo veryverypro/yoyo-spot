@@ -52,7 +52,7 @@ export default function HeroSection() {
           transition={{ delay: 1, duration: 0.5 }}
           className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-3 sm:mb-4"
         >
-          徐子曦 (Vincent) · 7岁 · 一年级
+          徐子曦 (Vincent) · 7岁 · 二年级
         </motion.p>
 
         <motion.p

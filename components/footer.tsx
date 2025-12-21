@@ -41,7 +41,7 @@ export default function Footer() {
             制作
           </p>
           <p className="text-gray-400 text-sm mt-2">
-            北京西城区奋斗小学 · 一年级
+            北京西城区奋斗小学 · 二年级
           </p>
         </div>
       </div>
