@@ -7,7 +7,7 @@ const projects = [
   {
     id: 1,
     title: "字母雨打字游戏",
-    description: "快速敲击键盘消除从天而降的字母，练习打字速度和反应力！",
+    description: "消除掉落字母，练习打字速度！",
     category: "互动游戏",
     icon: "⌨️",
     tags: ["打字", "游戏", "练习"],
