@@ -568,6 +568,24 @@
                     <p>数字是用"十"和"一"拼出来的，就像搭积木一样！</p>
                 </div>
 
+                <div class="block-demo" style="background: #fff8e1;">
+                    <p style="margin-bottom: 15px; color: #666; font-size: 1.1em;">💰 <strong>用钱来理解：</strong></p>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;">
+                        <div style="background: white; padding: 15px 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2em;">🪙</div>
+                            <div style="font-weight: bold; color: #ff6b6b;">1角</div>
+                            <div style="font-size: 0.9em; color: #999;">= 1个一</div>
+                        </div>
+                        <div style="font-size: 1.5em; color: #999;">=</div>
+                        <div style="background: white; padding: 15px 20px; border-radius: 10px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <div style="font-size: 2em;">💵</div>
+                            <div style="font-weight: bold; color: #667eea;">1元</div>
+                            <div style="font-size: 0.9em; color: #999;">= 1个十（10角）</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 15px; color: #666;">所以 <strong>3元5角 = 35角</strong>，就是 3个十 + 5个一！</p>
+                </div>
+
                 <div class="block-demo">
                     <p style="margin-bottom: 15px; color: #666;">这是 <strong>1个一</strong>：</p>
                     <div class="blocks" style="justify-content: center;">
@@ -964,102 +982,71 @@
                 </div>
 
                 <div class="carry-demo">
-                    <h3 style="color: #f57f17; margin-bottom: 15px;">📚 例子：47 + 38 怎么算？</h3>
+                    <h3 style="color: #f57f17; margin-bottom: 15px;">📚 进位加法：27 + 15 = ?</h3>
 
-                    <div class="carry-step">
-                        <div class="carry-step-title">第1步：拆分两个数</div>
-                        <div class="carry-visual">
-                            <span>47 = <span class="highlight-ten">40</span> + <span class="highlight-one">7</span></span>
+                    <div style="display: flex; justify-content: center; gap: 40px; align-items: flex-start; flex-wrap: wrap; margin: 20px 0;">
+                        <!-- 竖式 -->
+                        <div style="background: white; padding: 20px 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                            <div style="font-family: monospace; font-size: 2em; text-align: right; line-height: 1.4;">
+                                <div style="color: #e91e63; font-size: 0.5em; height: 1em;">¹</div>
+                                <div>2 7</div>
+                                <div style="color: #667eea;">+ 1 5</div>
+                                <div style="border-top: 3px solid #333; padding-top: 5px;"><strong>4 2</strong></div>
+                            </div>
                         </div>
-                        <div class="carry-visual" style="margin-top: 8px;">
-                            <span>38 = <span class="highlight-ten">30</span> + <span class="highlight-one">8</span></span>
+
+                        <!-- 步骤 -->
+                        <div style="text-align: left;">
+                            <div class="carry-step" style="margin: 0 0 10px 0;">
+                                <strong>① 先算个位：</strong><br>
+                                7 + 5 = 12<br>
+                                <span style="color: #e91e63;">满10进1，写2，进1</span>
+                            </div>
+                            <div class="carry-step" style="margin: 0;">
+                                <strong>② 再算十位：</strong><br>
+                                2 + 1 + <span style="color: #e91e63;">1</span> = 4
+                            </div>
                         </div>
                     </div>
 
-                    <div class="carry-step">
-                        <div class="carry-step-title">第2步：十和十加，一和一加</div>
-                        <div class="carry-visual">
-                            <span class="highlight-ten">40 + 30 = 70</span>
-                        </div>
-                        <div class="carry-visual" style="margin-top: 8px;">
-                            <span class="highlight-one">7 + 8 = 15</span>
-                        </div>
-                    </div>
-
-                    <div class="carry-step">
-                        <div class="carry-step-title">第3步：15里有1个十！拿出来</div>
-                        <div class="carry-visual">
-                            <span class="highlight-one">15</span>
-                            <span class="arrow">→</span>
-                            <span><span class="highlight-ten">10</span> + <span class="highlight-one">5</span></span>
-                        </div>
-                    </div>
-
-                    <div class="carry-step">
-                        <div class="carry-step-title">第4步：合起来</div>
-                        <div class="carry-visual">
-                            <span class="highlight-ten">70</span>
-                            <span>+</span>
-                            <span class="highlight-ten">10</span>
-                            <span>+</span>
-                            <span class="highlight-one">5</span>
-                            <span>=</span>
-                            <strong style="font-size: 1.3em;">85</strong>
-                        </div>
+                    <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center;">
+                        <strong style="font-size: 1.3em;">答案：42</strong>
                     </div>
                 </div>
 
-                <div class="carry-demo" style="background: #e8f5e9; border-color: #4caf50;">
-                    <h3 style="color: #2e7d32; margin-bottom: 15px;">📚 例子：62 - 28 怎么算？</h3>
+                <div class="carry-demo" style="background: #f3e5f5;">
+                    <h3 style="color: #7b1fa2; margin-bottom: 15px;">📚 退位减法：42 - 15 = ?</h3>
 
-                    <div class="carry-step" style="border-color: #4caf50;">
-                        <div class="carry-step-title" style="color: #2e7d32;">第1步：拆分</div>
-                        <div class="carry-visual">
-                            <span>62 = <span class="highlight-ten">60</span> + <span class="highlight-one">2</span></span>
+                    <div style="display: flex; justify-content: center; gap: 40px; align-items: flex-start; flex-wrap: wrap; margin: 20px 0;">
+                        <!-- 竖式 -->
+                        <div style="background: white; padding: 20px 30px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                            <div style="font-family: monospace; font-size: 2em; text-align: right; line-height: 1.4;">
+                                <div style="font-size: 0.5em; height: 1.2em; display: flex; justify-content: flex-end; gap: 0.5em;">
+                                    <span><span style="color: #2196f3; text-decoration: line-through;">4</span><span style="color: #2196f3;">3</span></span>
+                                    <span style="color: #2196f3;">₁</span>
+                                </div>
+                                <div>4 2</div>
+                                <div style="color: #667eea;">− 1 5</div>
+                                <div style="border-top: 3px solid #333; padding-top: 5px;"><strong>2 7</strong></div>
+                            </div>
                         </div>
-                        <div class="carry-visual" style="margin-top: 8px;">
-                            <span>28 = <span class="highlight-ten">20</span> + <span class="highlight-one">8</span></span>
+
+                        <!-- 步骤 -->
+                        <div style="text-align: left;">
+                            <div class="carry-step" style="margin: 0 0 10px 0; border-color: #9c27b0;">
+                                <strong>① 先算个位：</strong><br>
+                                2 − 5 不够减！<br>
+                                <span style="color: #2196f3;">向十位借1，12 − 5 = 7</span>
+                            </div>
+                            <div class="carry-step" style="margin: 0; border-color: #9c27b0;">
+                                <strong>② 再算十位：</strong><br>
+                                4 − <span style="color: #2196f3;">1</span> − 1 = 2
+                            </div>
                         </div>
                     </div>
 
-                    <div class="carry-step" style="border-color: #4caf50;">
-                        <div class="carry-step-title" style="color: #2e7d32;">第2步：个位 2-8 不够减！</div>
-                        <div class="carry-visual">
-                            <span class="highlight-one">2</span>
-                            <span>-</span>
-                            <span class="highlight-one">8</span>
-                            <span>=</span>
-                            <span style="color: #c62828;">不够！</span>
-                        </div>
-                    </div>
-
-                    <div class="carry-step" style="border-color: #4caf50;">
-                        <div class="carry-step-title" style="color: #2e7d32;">第3步：从十位借1个十（=10个一）</div>
-                        <div class="carry-visual">
-                            <span class="highlight-ten">60</span>
-                            <span class="arrow">→</span>
-                            <span><span class="highlight-ten">50</span> + <span class="highlight-one">10</span></span>
-                        </div>
-                        <div class="carry-visual" style="margin-top: 8px;">
-                            <span>个位变成：<span class="highlight-one">10 + 2 = 12</span></span>
-                        </div>
-                    </div>
-
-                    <div class="carry-step" style="border-color: #4caf50;">
-                        <div class="carry-step-title" style="color: #2e7d32;">第4步：现在可以减了</div>
-                        <div class="carry-visual">
-                            <span class="highlight-ten">50 - 20 = 30</span>
-                        </div>
-                        <div class="carry-visual" style="margin-top: 8px;">
-                            <span class="highlight-one">12 - 8 = 4</span>
-                        </div>
-                        <div class="carry-visual" style="margin-top: 8px;">
-                            <span class="highlight-ten">30</span>
-                            <span>+</span>
-                            <span class="highlight-one">4</span>
-                            <span>=</span>
-                            <strong style="font-size: 1.3em;">34</strong>
-                        </div>
+                    <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center;">
+                        <strong style="font-size: 1.3em;">答案：27</strong>
                     </div>
                 </div>
 
@@ -1076,39 +1063,23 @@
             <div class="card">
                 <h2 class="section-title">🚀 跨越整百：199 后面是几？</h2>
 
-                <div class="knowledge-box" style="background: #e3f2fd; border-color: #2196f3;">
-                    <h4 style="color: #1565c0;">🔢 先数数看</h4>
-                    <p style="font-size: 1.3em; line-height: 2;">
-                        197 → 198 → 199 → <strong style="color: #e91e63; font-size: 1.2em;">?</strong>
-                    </p>
-                </div>
+                <div class="block-demo" style="background: #e3f2fd;">
+                    <p style="margin-bottom: 15px; color: #1565c0; font-size: 1.1em; font-weight: 500;">🎮 试试这个计数器，点击按钮看看数字怎么变：</p>
 
-                <div class="block-demo">
-                    <p style="margin-bottom: 20px; color: #666; font-size: 1.1em;">想象一个<strong>计数器</strong>，像汽车里程表一样：</p>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin: 20px 0;">
+                        <button onclick="changeCounter(-1)" style="background: #5e35b1; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.8em; cursor: pointer; font-weight: bold;">−</button>
 
-                    <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin: 25px 0;">
-                        <!-- 199 -->
-                        <div style="text-align: center;">
-                            <div style="display: flex; gap: 4px; justify-content: center;">
-                                <div style="background: #333; color: white; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">1</div>
-                                <div style="background: #333; color: white; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">9</div>
-                                <div style="background: #333; color: #ffc107; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">9</div>
-                            </div>
-                            <div style="margin-top: 10px; color: #666;">现在是 199</div>
+                        <div style="display: flex; gap: 4px;" id="counterDisplay">
+                            <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2.2em; font-family: monospace; font-weight: bold; min-width: 45px; text-align: center;" id="digit-hundred">1</div>
+                            <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2.2em; font-family: monospace; font-weight: bold; min-width: 45px; text-align: center;" id="digit-ten">9</div>
+                            <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2.2em; font-family: monospace; font-weight: bold; min-width: 45px; text-align: center;" id="digit-one">9</div>
                         </div>
 
-                        <div style="font-size: 2em; color: #999;">→</div>
-
-                        <!-- 200 -->
-                        <div style="text-align: center;">
-                            <div style="display: flex; gap: 4px; justify-content: center;">
-                                <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">2</div>
-                                <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">0</div>
-                                <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">0</div>
-                            </div>
-                            <div style="margin-top: 10px; color: #4caf50; font-weight: bold;">加1后变成 200</div>
-                        </div>
+                        <button onclick="changeCounter(1)" style="background: #e91e63; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.8em; cursor: pointer; font-weight: bold;">+</button>
                     </div>
+
+                    <p style="color: #666; font-size: 1.2em;">当前数字：<strong id="counterValue" style="color: #333; font-size: 1.3em;">199</strong></p>
+                    <p style="color: #999; font-size: 0.9em; margin-top: 10px;">试试从 199 加到 200，或从 200 减到 199！</p>
                 </div>
 
                 <div class="carry-demo" style="background: #fff8e1;">
@@ -1347,6 +1318,36 @@
     </div>
 
     <script>
+        // 互动计数器
+        let counterValue = 199;
+
+        function changeCounter(delta) {
+            counterValue += delta;
+            if (counterValue < 0) counterValue = 0;
+            if (counterValue > 999) counterValue = 999;
+
+            document.getElementById('counterValue').textContent = counterValue;
+
+            // 更新显示
+            const str = counterValue.toString().padStart(3, '0');
+            const digitHundred = document.getElementById('digit-hundred');
+            const digitTen = document.getElementById('digit-ten');
+            const digitOne = document.getElementById('digit-one');
+
+            // 检查哪些位变了，加动画效果
+            const oldH = digitHundred.textContent;
+            const oldT = digitTen.textContent;
+            const oldO = digitOne.textContent;
+
+            digitHundred.textContent = str[0];
+            digitTen.textContent = str[1];
+            digitOne.textContent = str[2];
+
+            // 变化的位高亮
+            digitHundred.style.color = (oldH !== str[0]) ? '#ffc107' : '#4caf50';
+            digitTen.style.color = (oldT !== str[1]) ? '#ffc107' : '#4caf50';
+            digitOne.style.color = (oldO !== str[2]) ? '#ffc107' : '#4caf50';
+        }
 
         function showSplit(num, el) {
             const resultEl = document.getElementById('split-' + num);
