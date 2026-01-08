@@ -50,6 +50,38 @@
             margin-top: 8px;
         }
 
+        /* 目录导航 */
+        .nav-tags {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 25px;
+            padding: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            overflow-x: auto;
+        }
+
+        .nav-tag {
+            background: white;
+            color: #333;
+            padding: 6px 12px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.8em;
+            font-weight: 500;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+
+        .nav-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background: #fff8e1;
+        }
+
         /* 内容卡片 */
         .card {
             background: white;
@@ -516,6 +548,15 @@
             <p>理解数字是怎么"拼"出来的</p>
         </div>
 
+        <!-- 目录导航 -->
+        <div class="nav-tags">
+            <a href="#learn1" class="nav-tag">📦 认识十和一</a>
+            <a href="#learn2" class="nav-tag">✂️ 数的拆分</a>
+            <a href="#learn4" class="nav-tag">🏛️ 个十百千万</a>
+            <a href="#learn3" class="nav-tag">🎯 进位退位</a>
+            <a href="#learn5" class="nav-tag">🚀 跨越整百</a>
+            <a href="#practice" class="nav-tag">✏️ 综合练习</a>
+        </div>
 
         <!-- 第一课：认识十和一 -->
         <div id="learn1" class="tab-content active">
@@ -1030,6 +1071,234 @@
             </div>
         </div>
 
+        <!-- 跨越整百 -->
+        <div id="learn5" class="tab-content">
+            <div class="card">
+                <h2 class="section-title">🚀 跨越整百：199 后面是几？</h2>
+
+                <div class="knowledge-box" style="background: #e3f2fd; border-color: #2196f3;">
+                    <h4 style="color: #1565c0;">🔢 先数数看</h4>
+                    <p style="font-size: 1.3em; line-height: 2;">
+                        197 → 198 → 199 → <strong style="color: #e91e63; font-size: 1.2em;">?</strong>
+                    </p>
+                </div>
+
+                <div class="block-demo">
+                    <p style="margin-bottom: 20px; color: #666; font-size: 1.1em;">想象一个<strong>计数器</strong>，像汽车里程表一样：</p>
+
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin: 25px 0;">
+                        <!-- 199 -->
+                        <div style="text-align: center;">
+                            <div style="display: flex; gap: 4px; justify-content: center;">
+                                <div style="background: #333; color: white; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">1</div>
+                                <div style="background: #333; color: white; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">9</div>
+                                <div style="background: #333; color: #ffc107; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">9</div>
+                            </div>
+                            <div style="margin-top: 10px; color: #666;">现在是 199</div>
+                        </div>
+
+                        <div style="font-size: 2em; color: #999;">→</div>
+
+                        <!-- 200 -->
+                        <div style="text-align: center;">
+                            <div style="display: flex; gap: 4px; justify-content: center;">
+                                <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">2</div>
+                                <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">0</div>
+                                <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">0</div>
+                            </div>
+                            <div style="margin-top: 10px; color: #4caf50; font-weight: bold;">加1后变成 200</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carry-demo" style="background: #fff8e1;">
+                    <h3 style="color: #f57f17; margin-bottom: 15px;">💡 为什么会这样？</h3>
+
+                    <div style="background: white; border-radius: 10px; padding: 20px; margin: 15px 0;">
+                        <p style="font-size: 1.1em; line-height: 2; color: #555;">
+                            每个数位只能是 <strong>0~9</strong>，就像计数器的轮子只有 0-9 这10个数字。<br><br>
+                            当个位的 <strong style="color: #e91e63;">9</strong> 再加1，就变成10了，<br>
+                            但个位<strong>放不下10</strong>，所以：<br>
+                            → 个位归零变成 <strong style="color: #4caf50;">0</strong><br>
+                            → 十位加1，9+1=10，十位也放不下！<br>
+                            → 十位归零变成 <strong style="color: #4caf50;">0</strong><br>
+                            → 百位加1，1+1=<strong style="color: #4caf50;">2</strong><br><br>
+                            所以 199 → <strong style="font-size: 1.3em;">200</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="block-demo">
+                    <p style="margin-bottom: 15px; color: #666;">再看几个例子：</p>
+                    <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                        <div style="font-size: 1.4em;">
+                            <span style="background: #f5f5f5; padding: 8px 15px; border-radius: 8px;">9</span>
+                            <span style="margin: 0 10px;">+ 1 =</span>
+                            <span style="background: #e8f5e9; padding: 8px 15px; border-radius: 8px; color: #2e7d32; font-weight: bold;">10</span>
+                            <span style="color: #999; margin-left: 10px; font-size: 0.8em;">（个位满，进到十位）</span>
+                        </div>
+                        <div style="font-size: 1.4em;">
+                            <span style="background: #f5f5f5; padding: 8px 15px; border-radius: 8px;">99</span>
+                            <span style="margin: 0 10px;">+ 1 =</span>
+                            <span style="background: #e8f5e9; padding: 8px 15px; border-radius: 8px; color: #2e7d32; font-weight: bold;">100</span>
+                            <span style="color: #999; margin-left: 10px; font-size: 0.8em;">（连续进位两次）</span>
+                        </div>
+                        <div style="font-size: 1.4em;">
+                            <span style="background: #f5f5f5; padding: 8px 15px; border-radius: 8px;">199</span>
+                            <span style="margin: 0 10px;">+ 1 =</span>
+                            <span style="background: #e8f5e9; padding: 8px 15px; border-radius: 8px; color: #2e7d32; font-weight: bold;">200</span>
+                            <span style="color: #999; margin-left: 10px; font-size: 0.8em;">（连续进位三次）</span>
+                        </div>
+                        <div style="font-size: 1.4em;">
+                            <span style="background: #f5f5f5; padding: 8px 15px; border-radius: 8px;">999</span>
+                            <span style="margin: 0 10px;">+ 1 =</span>
+                            <span style="background: #e8f5e9; padding: 8px 15px; border-radius: 8px; color: #2e7d32; font-weight: bold;">1000</span>
+                            <span style="color: #999; margin-left: 10px; font-size: 0.8em;">（连续进位四次）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="knowledge-box" style="background: #fce4ec; border-color: #e91e63;">
+                    <h4 style="color: #c2185b;">🎯 进位口诀</h4>
+                    <p style="font-size: 1.1em;">
+                        每个数位最大是 <strong>9</strong>，满了就归零，然后前面一位 <strong>+1</strong>！
+                    </p>
+                </div>
+
+                <!-- 退位部分 -->
+                <div style="margin-top: 30px; padding-top: 30px; border-top: 2px dashed #e0e0e0;">
+                    <h3 style="color: #5e35b1; margin-bottom: 20px; font-size: 1.3em;">🔙 反过来：200 前面是几？</h3>
+
+                    <div class="knowledge-box" style="background: #ede7f6; border-color: #5e35b1;">
+                        <h4 style="color: #5e35b1;">🔢 倒着数数看</h4>
+                        <p style="font-size: 1.3em; line-height: 2;">
+                            203 → 202 → 201 → 200 → <strong style="color: #e91e63; font-size: 1.2em;">?</strong>
+                        </p>
+                    </div>
+
+                    <div class="block-demo">
+                        <p style="margin-bottom: 20px; color: #666; font-size: 1.1em;">计数器倒转：</p>
+
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin: 25px 0;">
+                            <!-- 200 -->
+                            <div style="text-align: center;">
+                                <div style="display: flex; gap: 4px; justify-content: center;">
+                                    <div style="background: #333; color: white; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">2</div>
+                                    <div style="background: #333; color: #ffc107; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">0</div>
+                                    <div style="background: #333; color: #ffc107; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">0</div>
+                                </div>
+                                <div style="margin-top: 10px; color: #666;">现在是 200</div>
+                            </div>
+
+                            <div style="font-size: 2em; color: #999;">→</div>
+
+                            <!-- 199 -->
+                            <div style="text-align: center;">
+                                <div style="display: flex; gap: 4px; justify-content: center;">
+                                    <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">1</div>
+                                    <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">9</div>
+                                    <div style="background: #333; color: #4caf50; padding: 15px 12px; border-radius: 8px; font-size: 2em; font-family: monospace; font-weight: bold;">9</div>
+                                </div>
+                                <div style="margin-top: 10px; color: #4caf50; font-weight: bold;">减1后变成 199</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carry-demo" style="background: #f3e5f5;">
+                        <h3 style="color: #7b1fa2; margin-bottom: 15px;">💡 为什么会这样？</h3>
+
+                        <div style="background: white; border-radius: 10px; padding: 20px; margin: 15px 0;">
+                            <p style="font-size: 1.1em; line-height: 2; color: #555;">
+                                200 的个位是 <strong style="color: #e91e63;">0</strong>，没法再减1了！<br><br>
+                                怎么办？向前面<strong>借</strong>！<br>
+                                → 十位是0，也没有，继续向百位借<br>
+                                → 百位的2借出1，变成 <strong style="color: #4caf50;">1</strong><br>
+                                → 借来的1个百 = 10个十，十位变成 <strong style="color: #4caf50;">9</strong>（用掉1个十给个位）<br>
+                                → 借来的1个十 = 10个一，个位 10-1 = <strong style="color: #4caf50;">9</strong><br><br>
+                                所以 200 - 1 = <strong style="font-size: 1.3em;">199</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="block-demo">
+                        <p style="margin-bottom: 15px; color: #666;">退位的例子：</p>
+                        <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                            <div style="font-size: 1.4em;">
+                                <span style="background: #f5f5f5; padding: 8px 15px; border-radius: 8px;">10</span>
+                                <span style="margin: 0 10px;">- 1 =</span>
+                                <span style="background: #ede7f6; padding: 8px 15px; border-radius: 8px; color: #5e35b1; font-weight: bold;">9</span>
+                                <span style="color: #999; margin-left: 10px; font-size: 0.8em;">（从十位借1）</span>
+                            </div>
+                            <div style="font-size: 1.4em;">
+                                <span style="background: #f5f5f5; padding: 8px 15px; border-radius: 8px;">100</span>
+                                <span style="margin: 0 10px;">- 1 =</span>
+                                <span style="background: #ede7f6; padding: 8px 15px; border-radius: 8px; color: #5e35b1; font-weight: bold;">99</span>
+                                <span style="color: #999; margin-left: 10px; font-size: 0.8em;">（连续借位两次）</span>
+                            </div>
+                            <div style="font-size: 1.4em;">
+                                <span style="background: #f5f5f5; padding: 8px 15px; border-radius: 8px;">200</span>
+                                <span style="margin: 0 10px;">- 1 =</span>
+                                <span style="background: #ede7f6; padding: 8px 15px; border-radius: 8px; color: #5e35b1; font-weight: bold;">199</span>
+                                <span style="color: #999; margin-left: 10px; font-size: 0.8em;">（连续借位两次）</span>
+                            </div>
+                            <div style="font-size: 1.4em;">
+                                <span style="background: #f5f5f5; padding: 8px 15px; border-radius: 8px;">1000</span>
+                                <span style="margin: 0 10px;">- 1 =</span>
+                                <span style="background: #ede7f6; padding: 8px 15px; border-radius: 8px; color: #5e35b1; font-weight: bold;">999</span>
+                                <span style="color: #999; margin-left: 10px; font-size: 0.8em;">（连续借位三次）</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="knowledge-box" style="background: #ede7f6; border-color: #5e35b1;">
+                        <h4 style="color: #5e35b1;">🎯 退位口诀</h4>
+                        <p style="font-size: 1.1em;">
+                            个位是 <strong>0</strong> 不够减？向前借1当 <strong>10</strong>！
+                        </p>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <div class="exercise-title">✏️ 你来试试：填空</div>
+
+                    <p style="color: #666; margin: 15px 0 10px; font-weight: 500;">进位：</p>
+                    <div class="exercise-input-row">
+                        <span class="exercise-text">99 + 1 =</span>
+                        <input type="number" class="exercise-input exercise-input-wide" id="cross1" placeholder="?">
+                    </div>
+
+                    <div class="exercise-input-row">
+                        <span class="exercise-text">199 + 1 =</span>
+                        <input type="number" class="exercise-input exercise-input-wide" id="cross2" placeholder="?">
+                    </div>
+
+                    <p style="color: #666; margin: 20px 0 10px; font-weight: 500;">退位：</p>
+                    <div class="exercise-input-row">
+                        <span class="exercise-text">100 - 1 =</span>
+                        <input type="number" class="exercise-input exercise-input-wide" id="cross3" placeholder="?">
+                    </div>
+
+                    <div class="exercise-input-row">
+                        <span class="exercise-text">200 - 1 =</span>
+                        <input type="number" class="exercise-input exercise-input-wide" id="cross4" placeholder="?">
+                    </div>
+
+                    <div class="exercise-input-row">
+                        <span class="exercise-text">300 - 1 =</span>
+                        <input type="number" class="exercise-input exercise-input-wide" id="cross5" placeholder="?">
+                    </div>
+
+                    <div class="exercise-input-row">
+                        <span class="exercise-text">1000 - 1 =</span>
+                        <input type="number" class="exercise-input exercise-input-wide" id="cross6" placeholder="?">
+                    </div>
+
+                    <button class="check-btn" onclick="checkCrossExercise()">检查答案</button>
+                    <div class="feedback" id="cross-feedback"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- 练习 -->
         <div id="practice" class="tab-content">
             <div class="card" id="practiceStart">
@@ -1193,6 +1462,33 @@
             } else {
                 feedback.className = 'feedback wrong';
                 feedback.textContent = `✗ 对了 ${correct}/${total} 题。注意：从右往左数，第1位是个位，第2位是十位...`;
+            }
+        }
+
+        function checkCrossExercise() {
+            const answers = [100, 200, 99, 199, 299, 999];
+            const ids = ['cross1', 'cross2', 'cross3', 'cross4', 'cross5', 'cross6'];
+            let correct = 0;
+
+            for (let i = 0; i < 6; i++) {
+                const input = document.getElementById(ids[i]);
+                if (parseInt(input.value) === answers[i]) {
+                    input.classList.remove('wrong');
+                    input.classList.add('correct');
+                    correct++;
+                } else {
+                    input.classList.remove('correct');
+                    input.classList.add('wrong');
+                }
+            }
+
+            const feedback = document.getElementById('cross-feedback');
+            if (correct === 6) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ 全对！你理解了进位和退位！';
+            } else {
+                feedback.className = 'feedback wrong';
+                feedback.textContent = `✗ 对了 ${correct}/6 题。进位：满10向前进1；退位：不够减向前借1当10！`;
             }
         }
 
