@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识点大全 - Yoyo 学习乐园</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 50%, #4facfe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.2em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1em;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 标签页导航 */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: rgba(255,255,255,0.3);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 内容区 */
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .semester-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #43e97b;
+        }
+
+        /* 知识模块 */
+        .module {
+            margin-bottom: 25px;
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .module-icon {
+            font-size: 1.5em;
+        }
+
+        .module-title {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .module-tag {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .module-tag.important {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+        }
+
+        .module-tag.basic {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .knowledge-list {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-left: 35px;
+        }
+
+        .knowledge-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .knowledge-item:last-child {
+            border-bottom: none;
+        }
+
+        .knowledge-item strong {
+            color: #333;
+        }
+
+        .formula {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.95em;
+            color: #856404;
+        }
+
+        .example {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        /* 口诀表 */
+        .multiplication-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .multiplication-item {
+            background: #e8f5e9;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #2e7d32;
+        }
+
+        /* 技能清单 */
+        .skill-overview {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #e0e0e0;
+        }
+
+        .skill-overview h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .skill-level {
+            margin-bottom: 15px;
+        }
+
+        .skill-level-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .skill-stars {
+            color: #feca57;
+            font-size: 1.1em;
+        }
+
+        .skill-level-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-left: 20px;
+        }
+
+        .skill-item {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #555;
+        }
+
+        .skill-level.critical .skill-item {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .skill-level.important .skill-item {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .skill-level.normal .skill-item {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .knowledge-list {
+                margin-left: 0;
+            }
+
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+
+            .multiplication-table {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="./" class="back-link">← 返回首页</a>
+
+        <div class="header">
+            <h1>📚 知识点大全</h1>
+            <p>一年级 ~ 二年级上学期</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('overview')">总览</button>
+            <button class="tab-btn" onclick="showTab('grade1-1')">一年级上</button>
+            <button class="tab-btn" onclick="showTab('grade1-2')">一年级下</button>
+            <button class="tab-btn" onclick="showTab('grade2-1')">二年级上</button>
+        </div>
+
+        <div class="content">
+            <!-- 总览 -->
+            <div id="overview" class="tab-content active">
+                <h2 class="semester-title">核心技能清单</h2>
+
+                <div class="skill-level critical">
+                    <div class="skill-level-header">
+                        <span class="skill-stars">★★★★★</span>
+                        <span class="skill-level-title">必须熟练掌握</span>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">九九乘法口诀</span>
+                        <span class="skill-item">用口诀求商</span>
+                        <span class="skill-item">20以内进位加法</span>
+                        <span class="skill-item">20以内退位减法</span>
+                    </div>
+                </div>
+
+                <div class="skill-level important">
+                    <div class="skill-level-header">
+                        <span class="skill-stars">★★★★</span>
+                        <span class="skill-level-title">重要基础</span>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">100以内加减法</span>
+                        <span class="skill-item">乘除法的意义</span>
+                        <span class="skill-item">平均分概念</span>
+                        <span class="skill-item">长度单位换算</span>
+                    </div>
+                </div>
+
+                <div class="skill-level normal">
+                    <div class="skill-level-header">
+                        <span class="skill-stars">★★★</span>
+                        <span class="skill-level-title">需要掌握</span>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">数的组成</span>
+                        <span class="skill-item">数位概念</span>
+                        <span class="skill-item">人民币换算</span>
+                        <span class="skill-item">比较大小</span>
+                    </div>
+                </div>
+
+                <div class="skill-level">
+                    <div class="skill-level-header">
+                        <span class="skill-stars">★★</span>
+                        <span class="skill-level-title">了解即可</span>
+                    </div>
+                    <div class="skill-items">
+                        <span class="skill-item">立体图形识别</span>
+                        <span class="skill-item">平面图形识别</span>
+                        <span class="skill-item">位置关系</span>
+                        <span class="skill-item">分类与整理</span>
+                        <span class="skill-item">找规律</span>
+                    </div>
+                </div>
+
+                <div class="skill-overview">
+                    <h3>知识体系结构</h3>
+                    <div class="module">
+                        <div class="module-header">
+                            <span class="module-icon">🔢</span>
+                            <span class="module-title">数的认识</span>
+                        </div>
+                        <div class="knowledge-list">
+                            <div class="knowledge-item">一上：1~20的认识</div>
+                            <div class="knowledge-item">一下：100以内数的认识、数位概念</div>
+                        </div>
+                    </div>
+
+                    <div class="module">
+                        <div class="module-header">
+                            <span class="module-icon">➕</span>
+                            <span class="module-title">计算</span>
+                        </div>
+                        <div class="knowledge-list">
+                            <div class="knowledge-item">一上：10以内加减法、20以内进位加法</div>
+                            <div class="knowledge-item">一下：20以内退位减法、100以内加减法</div>
+                            <div class="knowledge-item">二上：表内乘法（1-9）、表内除法（1-9）</div>
+                        </div>
+                    </div>
+
+                    <div class="module">
+                        <div class="module-header">
+                            <span class="module-icon">📐</span>
+                            <span class="module-title">图形与测量</span>
+                        </div>
+                        <div class="knowledge-list">
+                            <div class="knowledge-item">一上：立体图形（长方体、正方体、圆柱、球）</div>
+                            <div class="knowledge-item">一下：平面图形（长方形、正方形、三角形、圆）</div>
+                            <div class="knowledge-item">二上：长度单位（厘米、米）</div>
+                        </div>
+                    </div>
+
+                    <div class="module">
+                        <div class="module-header">
+                            <span class="module-icon">💰</span>
+                            <span class="module-title">其他</span>
+                        </div>
+                        <div class="knowledge-list">
+                            <div class="knowledge-item">一上：位置（上下、前后、左右）</div>
+                            <div class="knowledge-item">一下：人民币、找规律</div>
+                            <div class="knowledge-item">二上：分类与整理</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一年级上册 -->
+            <div id="grade1-1" class="tab-content">
+                <h2 class="semester-title">一年级上册</h2>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">🔢</span>
+                        <span class="module-title">1~5的认识和加减法</span>
+                        <span class="module-tag basic">基础</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>数数：</strong>按顺序数，最后数到几就是总个数</div>
+                        <div class="knowledge-item"><strong>比较：</strong>同样多、比多少</div>
+                        <div class="knowledge-item"><strong>符号：</strong><span class="formula">&gt;</span> 大于、<span class="formula">&lt;</span> 小于、<span class="formula">=</span> 等于</div>
+                        <div class="knowledge-item"><strong>分与合：</strong>5可以分成1和4、2和3</div>
+                        <div class="knowledge-item"><strong>加法：</strong>把两部分合起来</div>
+                        <div class="knowledge-item"><strong>减法：</strong>从总数里去掉一部分</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">🔢</span>
+                        <span class="module-title">6~10的认识和加减法</span>
+                        <span class="module-tag basic">基础</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>6~10的加减法</strong></div>
+                        <div class="knowledge-item"><strong>连加：</strong><span class="example">2 + 3 + 4 = 9</span></div>
+                        <div class="knowledge-item"><strong>连减：</strong><span class="example">10 - 3 - 2 = 5</span></div>
+                        <div class="knowledge-item"><strong>加减混合：</strong><span class="example">8 - 3 + 2 = 7</span></div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">📦</span>
+                        <span class="module-title">认识立体图形</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>长方体：</strong>6个面，相对的面相同</div>
+                        <div class="knowledge-item"><strong>正方体：</strong>6个面都是正方形</div>
+                        <div class="knowledge-item"><strong>圆柱：</strong>上下两个圆形，侧面是曲面</div>
+                        <div class="knowledge-item"><strong>球：</strong>圆圆的，可以滚动</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">🔢</span>
+                        <span class="module-title">11~20的认识</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>数的组成：</strong>11 = 1个十 + 1个一</div>
+                        <div class="knowledge-item"><strong>数的顺序：</strong>11, 12, 13... 20</div>
+                        <div class="knowledge-item"><strong>比较大小：</strong>先比十位，再比个位</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">➕</span>
+                        <span class="module-title">20以内的进位加法</span>
+                        <span class="module-tag important">重点</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>凑十法：</strong>看大数，拆小数，凑成十，再加余数</div>
+                        <div class="knowledge-item"><strong>例子：</strong><span class="formula">9 + 4 = 9 + 1 + 3 = 10 + 3 = 13</span></div>
+                        <div class="knowledge-item"><strong>例子：</strong><span class="formula">8 + 5 = 8 + 2 + 3 = 10 + 3 = 13</span></div>
+                        <div class="knowledge-item"><strong>例子：</strong><span class="formula">7 + 6 = 7 + 3 + 3 = 10 + 3 = 13</span></div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">📍</span>
+                        <span class="module-title">位置</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>上下：</strong>位置高的在上，低的在下</div>
+                        <div class="knowledge-item"><strong>前后：</strong>面对的方向是前，背对的是后</div>
+                        <div class="knowledge-item"><strong>左右：</strong>以自己的左右手为标准</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 一年级下册 -->
+            <div id="grade1-2" class="tab-content">
+                <h2 class="semester-title">一年级下册</h2>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">📐</span>
+                        <span class="module-title">认识平面图形</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>长方形：</strong>4条边，对边相等，4个直角</div>
+                        <div class="knowledge-item"><strong>正方形：</strong>4条边都相等，4个直角</div>
+                        <div class="knowledge-item"><strong>三角形：</strong>3条边，3个角</div>
+                        <div class="knowledge-item"><strong>圆：</strong>没有角，曲线围成</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">➖</span>
+                        <span class="module-title">20以内的退位减法</span>
+                        <span class="module-tag important">重点</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>破十法：</strong>把被减数的十位退1当10，用10减去减数，再加个位</div>
+                        <div class="knowledge-item"><strong>例子：</strong><span class="formula">15 - 8 = 10 - 8 + 5 = 2 + 5 = 7</span></div>
+                        <div class="knowledge-item"><strong>例子：</strong><span class="formula">13 - 6 = 10 - 6 + 3 = 4 + 3 = 7</span></div>
+                        <div class="knowledge-item"><strong>想加算减：</strong>15 - 8 = ? → 想 8 + ? = 15，所以等于 7</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">💯</span>
+                        <span class="module-title">100以内数的认识</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>数位：</strong>个位、十位</div>
+                        <div class="knowledge-item"><strong>数的组成：</strong><span class="formula">35 = 3个十 + 5个一 = 30 + 5</span></div>
+                        <div class="knowledge-item"><strong>比较大小：</strong>先比十位，十位相同再比个位</div>
+                        <div class="knowledge-item"><strong>整十数：</strong>10, 20, 30, 40... 100</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">💰</span>
+                        <span class="module-title">认识人民币</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>单位：</strong>元、角、分</div>
+                        <div class="knowledge-item"><strong>换算：</strong><span class="formula">1元 = 10角</span></div>
+                        <div class="knowledge-item"><strong>换算：</strong><span class="formula">1角 = 10分</span></div>
+                        <div class="knowledge-item"><strong>换算：</strong><span class="formula">1元 = 100分</span></div>
+                        <div class="knowledge-item"><strong>计算：</strong>相同单位才能相加减</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">➕</span>
+                        <span class="module-title">100以内的加法和减法（一）</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>整十数加减：</strong><span class="formula">30 + 40 = 70</span>，<span class="formula">70 - 30 = 40</span></div>
+                        <div class="knowledge-item"><strong>两位数加一位数：</strong><span class="formula">35 + 3 = 38</span>（不进位）</div>
+                        <div class="knowledge-item"><strong>两位数加整十数：</strong><span class="formula">35 + 30 = 65</span></div>
+                        <div class="knowledge-item"><strong>两位数减一位数：</strong><span class="formula">38 - 3 = 35</span>（不退位）</div>
+                        <div class="knowledge-item"><strong>两位数减整十数：</strong><span class="formula">65 - 30 = 35</span></div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">🔍</span>
+                        <span class="module-title">找规律</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>数字规律：</strong>2, 4, 6, 8, <span class="formula">10</span>, 12...</div>
+                        <div class="knowledge-item"><strong>图形规律：</strong>○△○△○<span class="formula">△</span>...</div>
+                        <div class="knowledge-item"><strong>方法：</strong>找出重复的部分，推断下一个</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 二年级上册 -->
+            <div id="grade2-1" class="tab-content">
+                <h2 class="semester-title">二年级上册（2024新版）</h2>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">📊</span>
+                        <span class="module-title">分类与整理</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>分类：</strong>按不同标准对物品进行分类</div>
+                        <div class="knowledge-item"><strong>整理：</strong>制作简单统计表</div>
+                        <div class="knowledge-item"><strong>读取：</strong>从统计表中获取信息</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">✖️</span>
+                        <span class="module-title">表内乘法（1-9）</span>
+                        <span class="module-tag important">核心重点</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>乘法的意义：</strong>求几个相同加数的和的简便运算</div>
+                        <div class="knowledge-item"><strong>例子：</strong><span class="formula">3 + 3 + 3 + 3 = 3 × 4 = 12</span></div>
+                        <div class="knowledge-item"><strong>乘法算式：</strong>乘数 × 乘数 = 积</div>
+                        <div class="knowledge-item" style="margin-top: 10px;"><strong>九九乘法口诀表：</strong></div>
+                    </div>
+                    <div class="multiplication-table">
+                        <div class="multiplication-item">一一得一</div>
+                        <div class="multiplication-item">一二得二</div>
+                        <div class="multiplication-item">二二得四</div>
+                        <div class="multiplication-item">一三得三</div>
+                        <div class="multiplication-item">二三得六</div>
+                        <div class="multiplication-item">三三得九</div>
+                        <div class="multiplication-item">一四得四</div>
+                        <div class="multiplication-item">二四得八</div>
+                        <div class="multiplication-item">三四十二</div>
+                        <div class="multiplication-item">四四十六</div>
+                        <div class="multiplication-item">一五得五</div>
+                        <div class="multiplication-item">二五一十</div>
+                        <div class="multiplication-item">三五十五</div>
+                        <div class="multiplication-item">四五二十</div>
+                        <div class="multiplication-item">五五二十五</div>
+                        <div class="multiplication-item">一六得六</div>
+                        <div class="multiplication-item">二六十二</div>
+                        <div class="multiplication-item">三六十八</div>
+                        <div class="multiplication-item">四六二十四</div>
+                        <div class="multiplication-item">五六三十</div>
+                        <div class="multiplication-item">六六三十六</div>
+                        <div class="multiplication-item">一七得七</div>
+                        <div class="multiplication-item">二七十四</div>
+                        <div class="multiplication-item">三七二十一</div>
+                        <div class="multiplication-item">四七二十八</div>
+                        <div class="multiplication-item">五七三十五</div>
+                        <div class="multiplication-item">六七四十二</div>
+                        <div class="multiplication-item">七七四十九</div>
+                        <div class="multiplication-item">一八得八</div>
+                        <div class="multiplication-item">二八十六</div>
+                        <div class="multiplication-item">三八二十四</div>
+                        <div class="multiplication-item">四八三十二</div>
+                        <div class="multiplication-item">五八四十</div>
+                        <div class="multiplication-item">六八四十八</div>
+                        <div class="multiplication-item">七八五十六</div>
+                        <div class="multiplication-item">八八六十四</div>
+                        <div class="multiplication-item">一九得九</div>
+                        <div class="multiplication-item">二九十八</div>
+                        <div class="multiplication-item">三九二十七</div>
+                        <div class="multiplication-item">四九三十六</div>
+                        <div class="multiplication-item">五九四十五</div>
+                        <div class="multiplication-item">六九五十四</div>
+                        <div class="multiplication-item">七九六十三</div>
+                        <div class="multiplication-item">八九七十二</div>
+                        <div class="multiplication-item">九九八十一</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">➗</span>
+                        <span class="module-title">表内除法（1-9）</span>
+                        <span class="module-tag important">核心重点</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>平均分：</strong>把一些物品分成几份，每份分得同样多</div>
+                        <div class="knowledge-item"><strong>除法意义①：</strong>把总数平均分成几份，求每份是多少</div>
+                        <div class="knowledge-item"><strong>例子：</strong>12个苹果平均分给3人，每人几个？<span class="formula">12 ÷ 3 = 4</span></div>
+                        <div class="knowledge-item"><strong>除法意义②：</strong>求一个数里面有几个另一个数</div>
+                        <div class="knowledge-item"><strong>例子：</strong>12个苹果，每4个一份，能分几份？<span class="formula">12 ÷ 4 = 3</span></div>
+                        <div class="knowledge-item"><strong>除法算式：</strong>被除数 ÷ 除数 = 商</div>
+                        <div class="knowledge-item"><strong>用口诀求商：</strong>想 除数 × ? = 被除数</div>
+                        <div class="knowledge-item"><strong>例子：</strong><span class="formula">24 ÷ 6 = ?</span> → 想六几二十四 → 六<strong>四</strong>二十四 → 答案是4</div>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header">
+                        <span class="module-icon">📏</span>
+                        <span class="module-title">厘米和米</span>
+                    </div>
+                    <div class="knowledge-list">
+                        <div class="knowledge-item"><strong>长度单位：</strong>厘米(cm)、米(m)</div>
+                        <div class="knowledge-item"><strong>换算：</strong><span class="formula">1米 = 100厘米</span></div>
+                        <div class="knowledge-item"><strong>测量方法：</strong>将物体左端对准直尺的"0"刻度，看右端对着的刻度</div>
+                        <div class="knowledge-item"><strong>线段特点：</strong>直的、有两个端点、可以量出长度</div>
+                        <div class="knowledge-item"><strong>估测参考：</strong></div>
+                        <div class="knowledge-item" style="padding-left: 20px;">• 1厘米 ≈ 指甲盖宽度</div>
+                        <div class="knowledge-item" style="padding-left: 20px;">• 1米 ≈ 小朋友伸开双臂的长度</div>
+                        <div class="knowledge-item" style="padding-left: 20px;">• 铅笔长约 17 厘米</div>
+                        <div class="knowledge-item" style="padding-left: 20px;">• 课桌高约 70 厘米</div>
+                        <div class="knowledge-item" style="padding-left: 20px;">• 教室长约 8~10 米</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // 隐藏所有内容
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            // 取消所有按钮激活
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active');
+            });
+            // 显示选中的内容
+            document.getElementById(tabId).classList.add('active');
+            // 激活对应按钮
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

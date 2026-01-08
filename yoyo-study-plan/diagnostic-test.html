@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoyo 数学诊断测验</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 50%, #4facfe 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 开始页面 */
+        .start-screen {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .start-screen h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .start-screen .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .test-info {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .test-info h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .test-info ul {
+            list-style: none;
+            color: #555;
+        }
+
+        .test-info li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .test-info li:last-child {
+            border-bottom: none;
+        }
+
+        .test-info li span:last-child {
+            color: #ff6b6b;
+            font-weight: 500;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: bold;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* 测验页面 */
+        .test-screen {
+            display: none;
+        }
+
+        .progress-bar {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .module-name {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .timer {
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-family: monospace;
+            font-size: 1.1em;
+        }
+
+        .progress-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .question-number {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 2.5em;
+            color: #333;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+
+        .question-text.word-problem {
+            font-size: 1.4em;
+            text-align: left;
+            line-height: 1.8;
+            font-weight: normal;
+        }
+
+        .answer-input {
+            font-size: 2em;
+            padding: 15px 30px;
+            border: 3px solid #ddd;
+            border-radius: 15px;
+            width: 200px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .answer-input:focus {
+            border-color: #4facfe;
+        }
+
+        .answer-input.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .answer-input.wrong {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .unit-hint {
+            color: #666;
+            font-size: 1.2em;
+            margin-left: 10px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 3px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            visibility: hidden;
+            min-height: 50px;
+        }
+
+        .feedback.show {
+            visibility: visible;
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .feedback.wrong {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        /* 选择题样式 */
+        .choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .choice-btn {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            font-size: 1.3em;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .choice-btn:hover {
+            border-color: #4facfe;
+            background: #e8f7ff;
+        }
+
+        .choice-btn.selected {
+            border-color: #4facfe;
+            background: #d0efff;
+        }
+
+        .choice-btn.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .choice-btn.wrong {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        /* 报告页面 */
+        .report-screen {
+            display: none;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .report-header h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .total-score {
+            font-size: 4em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .total-time {
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .module-results {
+            margin: 30px 0;
+        }
+
+        .module-result {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .module-result:last-child {
+            border-bottom: none;
+        }
+
+        .module-label {
+            width: 180px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .module-bar {
+            flex: 1;
+            height: 25px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 0 15px;
+        }
+
+        .module-bar-fill {
+            height: 100%;
+            border-radius: 15px;
+            transition: width 0.5s;
+        }
+
+        .module-bar-fill.excellent {
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+        }
+
+        .module-bar-fill.good {
+            background: linear-gradient(90deg, #2196f3, #03a9f4);
+        }
+
+        .module-bar-fill.average {
+            background: linear-gradient(90deg, #ff9800, #ffc107);
+        }
+
+        .module-bar-fill.weak {
+            background: linear-gradient(90deg, #f44336, #ff5722);
+        }
+
+        .module-score {
+            width: 80px;
+            text-align: right;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .analysis {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .analysis h3 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .weak-points {
+            list-style: none;
+        }
+
+        .weak-points li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .weak-points li:last-child {
+            border-bottom: none;
+        }
+
+        .priority-badge {
+            background: #f44336;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+        }
+
+        .priority-badge.medium {
+            background: #ff9800;
+        }
+
+        .priority-badge.low {
+            background: #4caf50;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            display: block;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .restart-btn:hover {
+            transform: scale(1.01);
+            box-shadow: 0 3px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .question-text {
+                font-size: 1.8em;
+            }
+
+            .answer-input {
+                font-size: 1.5em;
+                width: 150px;
+            }
+
+            .choices {
+                grid-template-columns: 1fr;
+            }
+
+            .module-label {
+                width: 120px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 开始页面 -->
+        <div class="start-screen" id="startScreen">
+            <h1>Yoyo 数学小挑战</h1>
+            <p class="subtitle">来测测你的数学超能力吧！</p>
+
+            <div class="test-info">
+                <h3>闯关内容</h3>
+                <ul>
+                    <li><span>A. 20以内加减法</span><span>10 题</span></li>
+                    <li><span>B. 100以内加减法</span><span>10 题</span></li>
+                    <li><span>C. 乘法口诀</span><span>15 题</span></li>
+                    <li><span>D. 除法</span><span>10 题</span></li>
+                    <li><span>E. 长度单位</span><span>5 题</span></li>
+                    <li><span>F. 应用题</span><span>5 题</span></li>
+                    <li style="font-weight: bold; color: #ff6b6b;"><span>总计</span><span>55 题</span></li>
+                </ul>
+            </div>
+
+            <p style="color: #666; margin: 20px 0;">预计用时：30-40 分钟</p>
+
+            <button class="start-btn" onclick="startTest()">开始挑战！</button>
+        </div>
+
+        <!-- 测验页面 -->
+        <div class="test-screen" id="testScreen">
+            <div class="progress-bar">
+                <div class="progress-header">
+                    <span class="module-name" id="moduleName">A. 20以内加减法</span>
+                    <span class="timer" id="timer">00:00</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number" id="questionNumber">第 1 题 / 共 55 题</div>
+                <div class="question-text" id="questionText">9 + 5 = ?</div>
+
+                <div id="inputArea">
+                    <input type="number" class="answer-input" id="answerInput" placeholder="?" autofocus>
+                    <span class="unit-hint" id="unitHint"></span>
+                </div>
+
+                <div id="choicesArea" class="choices" style="display: none;"></div>
+
+                <div class="feedback" id="feedback"></div>
+
+                <button class="submit-btn" id="submitBtn" onclick="submitAnswer()">确定</button>
+            </div>
+        </div>
+
+        <!-- 报告页面 -->
+        <div class="report-screen" id="reportScreen">
+            <div class="report-card">
+                <div class="report-header">
+                    <h2>挑战成绩单</h2>
+                    <div class="total-score" id="totalScore">85%</div>
+                    <div class="total-time" id="totalTime">用时：25分30秒</div>
+                </div>
+
+                <div class="module-results" id="moduleResults">
+                    <!-- 动态生成 -->
+                </div>
+
+                <div class="analysis">
+                    <h3>📊 薄弱点分析</h3>
+                    <ul class="weak-points" id="weakPoints">
+                        <!-- 动态生成 -->
+                    </ul>
+                </div>
+
+                <button class="restart-btn" onclick="restartTest()">再来一次！</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 测验数据
+        const modules = [
+            { id: 'A', name: 'A. 20以内加减法', count: 10 },
+            { id: 'B', name: 'B. 100以内加减法', count: 10 },
+            { id: 'C', name: 'C. 乘法口诀', count: 15 },
+            { id: 'D', name: 'D. 除法', count: 10 },
+            { id: 'E', name: 'E. 长度单位', count: 5 },
+            { id: 'F', name: 'F. 应用题', count: 5 }
+        ];
+
+        let questions = [];
+        let currentIndex = 0;
+        let answers = [];
+        let startTime;
+        let timerInterval;
+        let moduleScores = {};
+
+        // 生成题目
+        function generateQuestions() {
+            questions = [];
+
+            // A. 20以内加减法 (10题)
+            for (let i = 0; i < 5; i++) {
+                // 进位加法
+                const a = Math.floor(Math.random() * 9) + 2; // 2-10
+                const b = Math.floor(Math.random() * (10 - a + 1)) + (11 - a); // 确保和>10
+                const sum = a + b;
+                if (sum <= 20) {
+                    questions.push({
+                        module: 'A',
+                        type: 'input',
+                        question: `${a} + ${b} = ?`,
+                        answer: sum,
+                        skill: '凑十法'
+                    });
+                } else {
+                    i--; // 重新生成
+                }
+            }
+            for (let i = 0; i < 5; i++) {
+                // 退位减法
+                const a = Math.floor(Math.random() * 9) + 11; // 11-19
+                const b = Math.floor(Math.random() * (a - 10)) + (a > 10 ? Math.max(1, a - 10 + 1) : 1);
+                if (b > 0 && b < a && (a % 10) < b) {
+                    questions.push({
+                        module: 'A',
+                        type: 'input',
+                        question: `${a} - ${b} = ?`,
+                        answer: a - b,
+                        skill: '破十法'
+                    });
+                } else {
+                    i--;
+                }
+            }
+
+            // B. 100以内加减法 (10题)
+            for (let i = 0; i < 5; i++) {
+                const a = Math.floor(Math.random() * 50) + 20; // 20-69
+                const b = Math.floor(Math.random() * 30) + 10; // 10-39
+                if (a + b <= 100) {
+                    questions.push({
+                        module: 'B',
+                        type: 'input',
+                        question: `${a} + ${b} = ?`,
+                        answer: a + b,
+                        skill: '两位数加法'
+                    });
+                } else {
+                    i--;
+                }
+            }
+            for (let i = 0; i < 5; i++) {
+                const a = Math.floor(Math.random() * 50) + 40; // 40-89
+                const b = Math.floor(Math.random() * 30) + 10; // 10-39
+                if (a > b) {
+                    questions.push({
+                        module: 'B',
+                        type: 'input',
+                        question: `${a} - ${b} = ?`,
+                        answer: a - b,
+                        skill: '两位数减法'
+                    });
+                } else {
+                    i--;
+                }
+            }
+
+            // C. 乘法口诀 (15题)
+            const usedMultiplications = new Set();
+            while (questions.filter(q => q.module === 'C').length < 15) {
+                const a = Math.floor(Math.random() * 9) + 1; // 1-9
+                const b = Math.floor(Math.random() * 9) + 1; // 1-9
+                const key = a <= b ? `${a}x${b}` : `${b}x${a}`;
+                if (!usedMultiplications.has(key)) {
+                    usedMultiplications.add(key);
+                    questions.push({
+                        module: 'C',
+                        type: 'input',
+                        question: `${a} × ${b} = ?`,
+                        answer: a * b,
+                        skill: `${Math.min(a,b)}的乘法口诀`
+                    });
+                }
+            }
+
+            // D. 除法 (10题)
+            const usedDivisions = new Set();
+            while (questions.filter(q => q.module === 'D').length < 10) {
+                const b = Math.floor(Math.random() * 9) + 1; // 除数 1-9
+                const c = Math.floor(Math.random() * 9) + 1; // 商 1-9
+                const a = b * c; // 被除数
+                const key = `${a}/${b}`;
+                if (!usedDivisions.has(key)) {
+                    usedDivisions.add(key);
+                    questions.push({
+                        module: 'D',
+                        type: 'input',
+                        question: `${a} ÷ ${b} = ?`,
+                        answer: c,
+                        skill: '用口诀求商'
+                    });
+                }
+            }
+
+            // E. 长度单位 (5题)
+            const lengthQuestions = [
+                { q: '1米 = _____ 厘米', a: 100, skill: '米转厘米' },
+                { q: '200厘米 = _____ 米', a: 2, skill: '厘米转米' },
+                { q: '3米 = _____ 厘米', a: 300, skill: '米转厘米' },
+                { q: '500厘米 = _____ 米', a: 5, skill: '厘米转米' },
+                { q: '1米50厘米 = _____ 厘米', a: 150, skill: '复合单位' }
+            ];
+            lengthQuestions.forEach(lq => {
+                questions.push({
+                    module: 'E',
+                    type: 'input',
+                    question: lq.q,
+                    answer: lq.a,
+                    skill: lq.skill
+                });
+            });
+
+            // F. 应用题 (5题)
+            const wordProblems = [
+                {
+                    q: '小明有 3 盒铅笔，每盒有 6 支。小明一共有多少支铅笔？',
+                    a: 18,
+                    skill: '乘法应用'
+                },
+                {
+                    q: '有 24 个苹果，平均分给 4 个小朋友，每人分到多少个？',
+                    a: 6,
+                    skill: '除法应用（平均分）'
+                },
+                {
+                    q: '一根绳子长 2 米，剪去 50 厘米，还剩多少厘米？',
+                    a: 150,
+                    skill: '长度计算'
+                },
+                {
+                    q: '教室里有 5 排桌子，每排 7 张。一共有多少张桌子？',
+                    a: 35,
+                    skill: '乘法应用'
+                },
+                {
+                    q: '有 45 本书，每 9 本放一堆，可以放几堆？',
+                    a: 5,
+                    skill: '除法应用（包含除）'
+                }
+            ];
+            wordProblems.forEach(wp => {
+                questions.push({
+                    module: 'F',
+                    type: 'input',
+                    question: wp.q,
+                    answer: wp.a,
+                    skill: wp.skill,
+                    isWordProblem: true
+                });
+            });
+
+            // 按模块排序
+            questions.sort((a, b) => {
+                const order = ['A', 'B', 'C', 'D', 'E', 'F'];
+                return order.indexOf(a.module) - order.indexOf(b.module);
+            });
+        }
+
+        // 开始测验
+        function startTest() {
+            generateQuestions();
+            currentIndex = 0;
+            answers = [];
+            moduleScores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
+
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('testScreen').style.display = 'block';
+
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 1000);
+
+            showQuestion();
+        }
+
+        // 更新计时器
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+            const seconds = (elapsed % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+        }
+
+        // 显示题目
+        function showQuestion() {
+            const q = questions[currentIndex];
+            const currentModule = modules.find(m => m.id === q.module);
+
+            document.getElementById('moduleName').textContent = currentModule.name;
+            document.getElementById('questionNumber').textContent = `第 ${currentIndex + 1} 题 / 共 ${questions.length} 题`;
+
+            const questionText = document.getElementById('questionText');
+            questionText.textContent = q.question;
+            questionText.className = q.isWordProblem ? 'question-text word-problem' : 'question-text';
+
+            // 更新进度条
+            const progress = ((currentIndex) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+
+            // 重置输入
+            const input = document.getElementById('answerInput');
+            input.value = '';
+            input.className = 'answer-input';
+            input.disabled = false;
+            input.focus();
+
+            document.getElementById('feedback').className = 'feedback';
+            document.getElementById('submitBtn').textContent = '确定';
+            document.getElementById('submitBtn').disabled = false;
+
+            // 显示单位提示
+            const unitHint = document.getElementById('unitHint');
+            if (q.module === 'E' && q.skill === '厘米转米') {
+                unitHint.textContent = '米';
+            } else if (q.module === 'E' && (q.skill === '米转厘米' || q.skill === '复合单位')) {
+                unitHint.textContent = '厘米';
+            } else if (q.module === 'F' && q.skill === '长度计算') {
+                unitHint.textContent = '厘米';
+            } else {
+                unitHint.textContent = '';
+            }
+        }
+
+        // 提交答案
+        function submitAnswer() {
+            const q = questions[currentIndex];
+            const input = document.getElementById('answerInput');
+            const feedback = document.getElementById('feedback');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // 如果已经显示反馈，进入下一题
+            if (submitBtn.textContent === '下一题' || submitBtn.textContent === '查看报告') {
+                if (currentIndex < questions.length - 1) {
+                    currentIndex++;
+                    showQuestion();
+                } else {
+                    showReport();
+                }
+                return;
+            }
+
+            const userAnswer = parseInt(input.value);
+
+            if (isNaN(userAnswer)) {
+                input.focus();
+                return;
+            }
+
+            const isCorrect = userAnswer === q.answer;
+
+            answers.push({
+                question: q.question,
+                userAnswer: userAnswer,
+                correctAnswer: q.answer,
+                isCorrect: isCorrect,
+                module: q.module,
+                skill: q.skill
+            });
+
+            if (isCorrect) {
+                moduleScores[q.module]++;
+                input.className = 'answer-input correct';
+                feedback.className = 'feedback correct show';
+                feedback.textContent = '✓ 正确！';
+            } else {
+                input.className = 'answer-input wrong';
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = `✗ 正确答案是 ${q.answer}`;
+            }
+            input.disabled = true;
+
+            if (currentIndex < questions.length - 1) {
+                submitBtn.textContent = '下一题';
+            } else {
+                submitBtn.textContent = '查看报告';
+            }
+        }
+
+        // 显示报告
+        function showReport() {
+            clearInterval(timerInterval);
+
+            document.getElementById('testScreen').style.display = 'none';
+            document.getElementById('reportScreen').style.display = 'block';
+
+            // 计算总分
+            const totalCorrect = Object.values(moduleScores).reduce((a, b) => a + b, 0);
+            const totalQuestions = questions.length;
+            const percentage = Math.round((totalCorrect / totalQuestions) * 100);
+
+            document.getElementById('totalScore').textContent = `${percentage}%`;
+
+            // 用时
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            document.getElementById('totalTime').textContent = `用时：${minutes}分${seconds}秒`;
+
+            // 各模块成绩
+            const resultsHtml = modules.map(m => {
+                const score = moduleScores[m.id];
+                const total = m.count;
+                const pct = Math.round((score / total) * 100);
+                let levelClass = 'weak';
+                if (pct >= 90) levelClass = 'excellent';
+                else if (pct >= 70) levelClass = 'good';
+                else if (pct >= 50) levelClass = 'average';
+
+                return `
+                    <div class="module-result">
+                        <span class="module-label">${m.name}</span>
+                        <div class="module-bar">
+                            <div class="module-bar-fill ${levelClass}" style="width: ${pct}%"></div>
+                        </div>
+                        <span class="module-score">${score}/${total}</span>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('moduleResults').innerHTML = resultsHtml;
+
+            // 薄弱点分析
+            const weakAnalysis = [];
+
+            modules.forEach(m => {
+                const pct = (moduleScores[m.id] / m.count) * 100;
+                if (pct < 80) {
+                    let priority = 'high';
+                    let priorityText = '需重点练习';
+                    if (pct >= 60) {
+                        priority = 'medium';
+                        priorityText = '需要巩固';
+                    } else if (pct >= 80) {
+                        priority = 'low';
+                        priorityText = '稍加练习';
+                    }
+
+                    // 找出该模块的具体错题技能点
+                    const wrongSkills = answers
+                        .filter(a => a.module === m.id && !a.isCorrect)
+                        .map(a => a.skill);
+                    const uniqueSkills = [...new Set(wrongSkills)];
+
+                    weakAnalysis.push({
+                        module: m.name,
+                        percentage: Math.round(pct),
+                        priority: priority,
+                        priorityText: priorityText,
+                        skills: uniqueSkills
+                    });
+                }
+            });
+
+            // 按正确率排序（低的在前）
+            weakAnalysis.sort((a, b) => a.percentage - b.percentage);
+
+            if (weakAnalysis.length === 0) {
+                document.getElementById('weakPoints').innerHTML = `
+                    <li style="color: #4caf50; font-weight: bold;">
+                        🎉 太棒了！所有模块都掌握得很好！
+                    </li>
+                `;
+            } else {
+                const weakHtml = weakAnalysis.map(w => `
+                    <li>
+                        <span class="priority-badge ${w.priority}">${w.priorityText}</span>
+                        <span><strong>${w.module}</strong>（正确率 ${w.percentage}%）</span>
+                    </li>
+                    ${w.skills.length > 0 ? `<li style="padding-left: 30px; color: #666; font-size: 0.9em;">→ 薄弱技能：${w.skills.join('、')}</li>` : ''}
+                `).join('');
+
+                document.getElementById('weakPoints').innerHTML = weakHtml;
+            }
+        }
+
+        // 重新测验
+        function restartTest() {
+            document.getElementById('reportScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+        }
+
+        // 键盘事件
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && document.getElementById('testScreen').style.display === 'block') {
+                submitAnswer();
+            }
+        });
+    </script>
+</body>
+</html>
